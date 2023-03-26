@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-control" content="public" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" />
+
+    <link rel="stylesheet" href="Style/global.css" />
+    <link rel="stylesheet" href="Style/menu.css" />
+    <link rel="stylesheet" href="Style/game.css" />
+  </head>
+
+  <body>
+    <!-- -------------- header -------------- -->
+    <header>
+      <h1>Kółko i krzyżyk</h1>
+    </header>
+
+    <!-- -------------- menu -------------- -->
+    <div class="menu">
+      <div class="versus-type">
+        <h2 class="active">Zagraj z komputerem</h2>
+        <h2>Zagraj z graczem na jednym urządzeniu</h2>
+        <h2>Zagraj z graczem przez internet</h2>
+      </div>
+
+      <div class="versus">
+        <div class="option active"><i class="fa-solid fa-desktop"></i></div>
+        <div class="option"><i class="fa-solid fa-user"></i></div>
+        <div class="option"><i class="fa-solid fa-users"></i></div>
+      </div>
+
+      <div class="gamemodes">
+        <div class="option">Standardowy</div>
+        <div class="option">Odwrócony</div>
+        <div class="option">Inne 1</div>
+        <div class="option">Inne 2</div>
+      </div>
+    </div>
+
+    <!-- -------------- game -------------- -->
+    <div class="game" style="display: none">
+      <h2 class="message"></h2>
+      <div class="board"></div>
+    </div>
+
+    <!-- -------------- footer -------------- -->
+    <footer>Artur Pas 2023</footer>
+
+    <script src="Scripts/global.js"></script>
+    <script src="Scripts/ComputerEnemy.js"></script>
+    <script src="Scripts/Board.js"></script>
+    <script src="Scripts/Game.js"></script>
+    <script src="Scripts/Menu.js"></script>
+  </body>
+</html>

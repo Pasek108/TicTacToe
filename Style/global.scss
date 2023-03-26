@@ -1,0 +1,30 @@
+@import "helper_mixins";
+
+* {
+  font-size: 14px;
+  font-family: 'Varela Round', sans-serif;
+  letter-spacing: 0.05em;
+  box-sizing: border-box;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+
+  @include flex(column, center, center);
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  background-color: #2f3640;
+  color: white;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+

@@ -1,0 +1,85 @@
+@import "helper_mixins";
+
+/* ---------------------------- header ---------------------------- */
+header {
+  @include position(fixed, 0, $zindex: 10);
+  width: 100%;
+  padding: 0.5rem;
+  background: #1e2228;
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+  }
+}
+
+/* ---------------------------- menu ---------------------------- */
+.menu {
+  @include flex(column, center, flex-start);
+  margin: 4rem 0;
+}
+
+.versus-type {
+  h2 {
+    display: none;
+    margin: 0;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .active {
+    display: block;
+  }
+}
+
+.versus {
+  @include flex(row, center, space-between);
+  min-width: 22rem;
+  margin-bottom: 1rem;
+
+  .option {
+    position: relative;
+    @include flex(column, center, center);
+    width: 7rem;
+    height: 7rem;
+    background: #273c75;
+    cursor: pointer;
+
+    i {
+      font-size: 3rem;
+    }
+  }
+
+  .active {
+    border: 2px solid white;
+    background: #192a56;
+  }
+}
+
+.gamemodes {
+  @include flex(column, center, center);
+
+  .option {
+    min-width: 22rem;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    background: #273c75;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background: #192a56;
+    }
+  }
+}
+
+/* ---------------------------- footer ---------------------------- */
+footer {
+  @include position(fixed, $bottom: 0);
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}

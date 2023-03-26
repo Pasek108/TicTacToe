@@ -1,0 +1,12 @@
+@mixin flex($direction, $align, $justify) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin position($position, $top: auto, $right: auto, $bottom: auto, $left: auto, $zindex: auto) {
+  position: $position;
+  inset: $top $right $bottom $left;
+  z-index: $zindex;
+}
