@@ -8,6 +8,7 @@ class Board {
 
     this.container.style.gridTemplateColumns = `repeat(${this.size}, ${21 / this.size}rem)`;
     this.container.style.gridTemplateRows = `repeat(${this.size}, ${21 / this.size}rem)`;
+    this.container.style.gap = `${1.5 / this.size}rem`;
     
     this.createTiles();
     this.createStrokes();
@@ -50,19 +51,33 @@ class Board {
     this.tiles[x][y].innerText = mark;
   }
 
+  lightUpMarks(mark) {
+    for (let i = 0; i < this.size; i++) {
+      for (let j = 0; j < this.size; j++) {
+        if (this.tiles[i][j].innerText == mark) this.tiles[i][j].style.background = "#35bc43";
+      }
+    }
+  }
+
+  resetLight() {
+    for (let i = 0; i < this.size; i++) {
+      for (let j = 0; j < this.size; j++) this.tiles[i][j].style.background = null;
+    }
+  }
+
   drawHorizontalStroke(id) {
-    this.strokes[0].classList.add("draw");
-    if (id == 0) this.strokes[0].classList.add("top");
-    if (id == 2) this.strokes[0].classList.add("bot");
+    this.strokes[0].classList.add(`draw`);
+    this.strokes[0].style.top = `${21 / (2 * this.size) - 0.25}rem`;
+    this.strokes[0].style.transform = `translateY(${id * 22.5 / this.size}rem)`;
   }
 
   drawVerticalStroke(id) {
-    this.strokes[1].classList.add("draw");
-      if (id == 0) this.strokes[1].classList.add("left");
-      if (id == 2) this.strokes[1].classList.add("right");
+    this.strokes[1].classList.add(`draw`);
+    this.strokes[1].style.left = `${(21 / (2 * this.size)) + 0.125}rem`;
+    this.strokes[1].style.transform = `translateX(${id * 22.5 / this.size}rem) rotate(90deg)`;
   }
 
   drawDiagonalStroke(id) {
-    this.strokes[id + 2].classList.add("draw");
+    this.strokes[id + 2].classList.add(`draw`);
   }
 }

@@ -2,7 +2,7 @@
 
 * {
   font-size: 14px;
-  font-family: 'Varela Round', sans-serif;
+  font-family: "Varela Round", sans-serif;
   letter-spacing: 0.05em;
   box-sizing: border-box;
 }
@@ -28,3 +28,42 @@ body {
   display: none;
 }
 
+h2 {
+  margin: 0;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.square-btn {
+  position: relative;
+  @include flex(column, center, center);
+  width: 7rem;
+  height: 7rem;
+  background: #273c75;
+  cursor: pointer;
+
+  i {
+    font-size: 3rem;
+  }
+
+  &.active {
+    border: 2px solid white;
+    background: #192a56;
+  }
+}
+
+.rect-btn {
+  min-width: 22rem;
+  padding: 1rem 2rem;
+  margin: 0.5rem 0;
+  background: #273c75;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background: #192a56;
+  }
+}

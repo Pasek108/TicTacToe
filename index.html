@@ -24,24 +24,36 @@
 
     <!-- -------------- menu -------------- -->
     <div class="menu">
-      <div class="versus-type">
-        <h2 class="active">Zagraj z komputerem</h2>
-        <h2>Zagraj z graczem na jednym urządzeniu</h2>
-        <h2>Zagraj z graczem przez internet</h2>
+      <div class="step1">
+        <h2>Zagraj z komputerem</h2>
+  
+        <div class="versus">
+          <div class="square-btn option active" data-id="0" data-message="Zagraj z komputerem"><i class="fa-solid fa-desktop"></i></div>
+          <div class="square-btn option" data-id="1" data-message="Zagraj z graczem na jednym urządzeniu"><i class="fa-solid fa-user"></i></div>
+          <div class="square-btn option" data-id="2" data-message="Zagraj z graczem przez internet"><i class="fa-solid fa-users"></i></div>
+        </div>
+  
+        <div class="gamemode">
+          <div class="rect-btn option" data-id="0">Standardowy</div>
+          <div class="rect-btn option" data-id="1">Inne 1</div>
+          <div class="rect-btn option" data-id="2">Inne 2</div>
+        </div>
       </div>
 
-      <div class="versus">
-        <div class="option active"><i class="fa-solid fa-desktop"></i></div>
-        <div class="option"><i class="fa-solid fa-user"></i></div>
-        <div class="option"><i class="fa-solid fa-users"></i></div>
-      </div>
+      <div class="step2" style="display: none;">
+        <h2>Zacznij jako</h2>
 
-      <div class="gamemodes">
-        <div class="option">Standardowy</div>
-        <div class="option">Odwrócony</div>
-        <div class="option">Inne 1</div>
-        <div class="option">Inne 2</div>
+        <div class="player">
+          <div class="square-btn option active" data-id="0"><i class="fa-solid fa-circle-user"></i> Gracz 1</div>
+          <div class="square-btn option" data-id="1"><i class="fa-solid fa-circle-user"></i> Gracz 2</div>
+        </div>
+  
+        <div class="type">
+          <div class="rect-btn option">Standardowy</div>
+          <div class="rect-btn option">Odwrócony</div>
+        </div>
       </div>
+      
     </div>
 
     <!-- -------------- game -------------- -->
@@ -51,12 +63,12 @@
     </div>
 
     <!-- -------------- footer -------------- -->
-    <footer>Artur Pas 2023</footer>
+    <footer>Artur Pas 2023 <a href="https://github.com/Pasek108/TicTacToe"><i class="fa-brands fa-github"></i></a></footer>
 
-    <script src="Scripts/global.js"></script>
     <script src="Scripts/ComputerEnemy.js"></script>
     <script src="Scripts/Board.js"></script>
     <script src="Scripts/Game.js"></script>
     <script src="Scripts/Menu.js"></script>
+    <script src="Scripts/global.js"></script>
   </body>
 </html>

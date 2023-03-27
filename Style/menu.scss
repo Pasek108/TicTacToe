@@ -14,72 +14,69 @@ header {
 }
 
 /* ---------------------------- menu ---------------------------- */
-.menu {
+.step1 {
   @include flex(column, center, flex-start);
   margin: 4rem 0;
-}
 
-.versus-type {
-  h2 {
-    display: none;
-    margin: 0;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    font-weight: bold;
+  .versus-type {
+    h2 { display: none; }
+    .active { display: block; }
   }
-
-  .active {
-    display: block;
-  }
-}
-
-.versus {
-  @include flex(row, center, space-between);
-  min-width: 22rem;
-  margin-bottom: 1rem;
-
-  .option {
-    position: relative;
-    @include flex(column, center, center);
-    width: 7rem;
-    height: 7rem;
-    background: #273c75;
-    cursor: pointer;
-
-    i {
-      font-size: 3rem;
-    }
-  }
-
-  .active {
-    border: 2px solid white;
-    background: #192a56;
-  }
-}
-
-.gamemodes {
-  @include flex(column, center, center);
-
-  .option {
+  
+  .versus {
+    @include flex(row, center, space-between);
     min-width: 22rem;
-    padding: 1rem 2rem;
-    margin: 0.5rem;
-    background: #273c75;
-    font-size: 1.5rem;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .gamemode {
+    @include flex(column, center, center);
+    margin-top: 1rem;
+  }
+}
 
-    &:hover {
-      background: #192a56;
+.step2 {
+  @include flex(column, center, flex-start);
+  margin: 4rem 0;
+  
+  .player {
+    @include flex(row, center, center);
+    min-width: 22rem;
+    margin-bottom: 1rem;
+
+    .square-btn {
+      width: 8rem;
+      height: 8rem;
+      margin: 0 0.5rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+
+      i {
+        margin-bottom: 0.5rem;
+      }
     }
+  }
+  
+  .type {
+    @include flex(column, center, center);
+    margin-top: 1rem;
   }
 }
 
 /* ---------------------------- footer ---------------------------- */
 footer {
   @include position(fixed, $bottom: 0);
+  @include flex(row, center, center);
   padding: 0.5rem;
   font-size: 1.25rem;
   font-weight: bold;
+
+  a {
+    color: white;
+
+     i {
+      margin-left: 0.5rem;
+      font-size: 1.5rem;
+     }
+  }
 }
