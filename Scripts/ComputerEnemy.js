@@ -10,14 +10,16 @@ class ComputerEnemy {
     switch (this.ai_type) {
       case "random": return this.random(game);
       case "minimax": return this.minimax(this.maximalize, game)[1];
-      case "alfabeta": return this.alfabeta(this.maximalize, game)[1];
-      case "modified_alfabeta": { 
-        if (game.availableMoves().length > 10) return this.line(this.maximalize, game);
-        else return this.alfabeta(this.maximalize, game)[1];
+      case "alphabeta": return this.alphabeta(this.maximalize, game)[1];
+      case "modified_alphabeta": {
+        if (game.availableMoves().length > 11) {
+          return this.maximalize ? this.makeLine(game) : this.avoidLine(game);
+        } else return this.alphabeta(this.maximalize, game)[1];
       }
     }
   }
 
+  /* -------------------- random -------------------- */
   random(game) {
     let random_x = 0;
     let random_y = 0;
@@ -31,56 +33,51 @@ class ComputerEnemy {
     return [random_x, random_y];
   }
 
+  /* -------------------- minimax -------------------- */
   minimax(maximalize, game) {
     if (game.checkIfGameOver()) return game.result();
-    const results = [];
+
+    let min = [10], max = [-10];
 
     game.availableMoves().forEach((move) => {
       game.makeMove(move[0], move[1]);
-      results.push(this.minimax(!maximalize, game));
-      results[results.length - 1][1] = game.back();
+      const result = this.minimax(!maximalize, game);
+      result[1] = game.back();
+
+      if (result[0] < min[0]) min = result;
+      if (result[0] > max[0]) max = result;
     });
 
-    if (maximalize) return this.max(results);
-    else return this.min(results);
+    return maximalize ? max : min;
   }
 
-  alfabeta(maximalize, game, parent_value) {
+  /* -------------------- alphabeta -------------------- */
+  alphabeta(maximalize, game, parent_value) {
     if (game.checkIfGameOver()) return game.result();
-    const results = [];
 
+    let min = [10], max = [-10];
     const moves = game.availableMoves();
 
     for (let i = 0; i < moves.length; i++) {
       game.makeMove(moves[i][0], moves[i][1]);
-      results.push(this.minimax(!maximalize, game, maximalize ? this.max(results) : this.min(results)));
-      results[results.length - 1][1] = game.back();
+      const result = this.alphabeta(!maximalize, game, maximalize ? max : min);
+      result[1] = game.back();
 
-      if (parent_value != null) {
-        if (maximalize && results[results.length - 1][0] > parent_value) break;
-        if (!maximalize && results[results.length - 1][0] < parent_value) break;
+      if (result[0] < min[0]) min = result;
+      if (result[0] > max[0]) max = result;
+
+      if (parent_value?.[1] != null) {
+        if (maximalize && result[0] > parent_value[0]) break;
+        if (!maximalize && result[0] < parent_value[0]) break;
       }
     }
 
-    if (maximalize) return this.max(results);
-    else return this.min(results);
+    return maximalize ? max : min;
   }
 
-  min(results) {
-    let min = results[0];
-    results.forEach((result) => (result[0] < min[0] ? (min = result) : ""));
-    return min;
-  }
-
-  max(results) {
-    let max = results[0];
-    results.forEach((result) => (result[0] > max[0] ? (max = result) : ""));
-    return max;
-  }
-
-  line(maximalize, game) {
+  /* -------------------- Only X algorithms -------------------- */
+  avoidLine(game) {
     const moves = game.availableMoves();
-    let is_empty = true;
     let weights = [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
@@ -88,80 +85,78 @@ class ComputerEnemy {
       [0, 0, 0, 0],
     ];
 
-    /* ------------- mark occupied places with "big" weight ------------- */
-    for (let i = 0; i < weights.length; i++) {
-      for (let j = 0; j < weights.length; j++) {
-        let is_free = false;
-        moves.forEach(move => (move[0] === i && move[1] == j) ? is_free = true : "");
-        
-        if (!is_free) {
-          weights[i][j] = (maximalize) ? -20 : 20;
-          is_empty = false;
-        }
-      }
-    }
+    this.markOccupiedPlaces(weights, moves, 20);
+    this.fillWeights(weights, moves, game);
 
-    if (is_empty) return [1, 1];
-
-    /* ------------- count X in the same row, column, diagonals as possible move ------------- */
-    moves.forEach(move => {
-      weights[move[0]][move[1]] += this.countInRow(game.game_state, move[1], "X");
-      weights[move[0]][move[1]] += this.countInCol(game.game_state, move[0], "X");
-      if (move[0] === move[1]) weights[move[0]][move[1]] += this.countInDiag1(game.game_state, "X");
-      if (move[0] === game.size - 1 - move[1]) weights[move[0]][move[1]] += this.countInDiag2(game.game_state, "X");
-    });
-
-    /* ------------- set starting result without "big" weight ------------- */
+    // find result
     let result = [0, 0];
-    let result_value = (maximalize) ? 20 : -20;
 
     for (let i = 0; i < weights.length; i++) {
       for (let j = 0; j < weights.length; j++) {
-        if (!maximalize && weights[i][j] < 20 && weights[i][j] > weights[result[0]][result[1]]) {
-          result = [i, j];
-          result_value = weights[i][j];
-        }
+        if (weights[i][j] < weights[result[0]][result[1]]) result = [i, j];
+      }
+    }
 
-        if (maximalize && weights[i][j] > -20 && weights[i][j] < result_value) {
+    return result;
+  }
+
+  makeLine(game) {
+    const moves = game.availableMoves();
+    if (moves.length === 16) return [1, 1];
+
+    let weights = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ];
+
+    this.markOccupiedPlaces(weights, moves, -20);
+    this.fillWeights(weights, moves, game);
+
+    //set start result small but no occupied place 
+    let result = [0, 0];
+    let result_value = 20;
+
+    for (let i = 0; i < weights.length; i++) {
+      for (let j = 0; j < weights.length; j++) {
+        if (weights[i][j] > -20 && weights[i][j] < result_value) {
           result = [i, j];
           result_value = weights[i][j];
         }
       }
     }
 
-    /* ------------- find result ------------- */
+    // find result
     for (let i = 0; i < weights.length; i++) {
       for (let j = 0; j < weights.length; j++) {
-        /* ------------- the worst option ------------- */
-        if (!maximalize && weights[i][j] < weights[result[0]][result[1]]) result = [i, j];
-        /* ------------- the best option but no if it can make player win ------------- */
-        else if (maximalize && weights[i][j] > weights[result[0]][result[1]]) {
+        if (weights[i][j] > weights[result[0]][result[1]]) {
           let counter = this.countInRow(weights, j, -20);
           if (counter === 2) continue;
-          if (counter === 3) {
+          else if (counter === 3) {
             result = [i, j];
-            continue
+            continue;
           }
 
           counter = this.countInCol(weights, i, -20);
           if (counter === 2) continue;
-          if (counter === 3) {
+          else if (counter === 3) {
             result = [i, j];
-            continue
+            continue;
           }
 
           counter = this.countInDiag1(weights, -20);
           if (counter === 2) continue;
-          if (counter === 3) {
+          else if (counter === 3) {
             result = [i, j];
-            continue
+            continue;
           }
 
           counter = this.countInDiag2(weights, -20);
           if (counter === 2) continue;
-          if (counter === 3) {
+          else if (counter === 3) {
             result = [i, j];
-            continue
+            continue;
           }
 
           result = [i, j];
@@ -172,27 +167,52 @@ class ComputerEnemy {
     return result;
   }
 
+  /* ------ mark occupied places with "big weight" ------ */
+  markOccupiedPlaces(weights, moves, weight) {
+    for (let i = 0; i < weights.length; i++) {
+      for (let j = 0; j < weights.length; j++) {
+        let is_free = false;
+        moves.forEach((move) => (move[0] === i && move[1] == j ? (is_free = true) : ""));
+        if (!is_free) weights[i][j] = weight;
+      }
+    }
+  }
+
+  /* ------ count all X for moves in it's row, column, diagonals ------ */
+  fillWeights(weights, moves, game) {
+    moves.forEach((move) => {
+      weights[move[0]][move[1]] += this.countInRow(game.game_state, move[1], "X");
+      weights[move[0]][move[1]] += this.countInCol(game.game_state, move[0], "X");
+      if (move[0] === move[1]) weights[move[0]][move[1]] += this.countInDiag1(game.game_state, "X");
+      if (move[0] === game.size - 1 - move[1]) weights[move[0]][move[1]] += this.countInDiag2(game.game_state, "X");
+    });
+  }
+
+  /* ------ count values in row ------ */
   countInRow(array, col_id, value) {
     let counter = 0;
-    for (let i = 0; i < array.length; i++) (array[i][col_id] === value) ? counter++ : "";
+    for (let i = 0; i < array.length; i++) array[i][col_id] === value ? counter++ : "";
     return counter;
   }
 
+  /* ------ count values in column ------ */
   countInCol(array, row_id, value) {
     let counter = 0;
-    for (let i = 0; i < array.length; i++) (array[row_id][i] === value) ? counter++ : "";
+    for (let i = 0; i < array.length; i++) array[row_id][i] === value ? counter++ : "";
     return counter;
   }
 
+  /* ------ count values in top left to right bottom diagonal ------ */
   countInDiag1(array, value) {
     let counter = 0;
-    for (let i = 0; i < array.length; i++) (array[i][i] === value) ? counter++ : "";
+    for (let i = 0; i < array.length; i++) array[i][i] === value ? counter++ : "";
     return counter;
   }
 
+  /* ------ count values in top right to left bottom diagonal ------ */
   countInDiag2(array, value) {
     let counter = 0;
-    for (let i = 0; i < array.length; i++) (array[i][array.length - 1 - i] === value) ? counter++ : "";
+    for (let i = 0; i < array.length; i++) array[i][array.length - 1 - i] === value ? counter++ : "";
     return counter;
   }
 }

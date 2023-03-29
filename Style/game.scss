@@ -39,15 +39,16 @@
     border-radius: 9999rem;
     background: #df0606;
     transform-origin: 0 0;
+    transition: width 1s 0.25s;
 
-    &.horizontal.draw { animation: animateStroke 1s forwards; }
-    &.vertical.draw { animation: animateStroke 1s forwards; }
+    &.horizontal.draw { width: 24rem; }
+    &.vertical.draw { width: 24rem; }
 
     &.diagonal-left-to-right {
       left: -0.65rem;
 
       &.draw {
-        animation: animateStrokeDiagonal 1s forwards;
+        width: 33.4rem;
         transform: rotate(45deg);
       }
     }
@@ -57,19 +58,9 @@
       left: 22.95rem;
 
       &.draw {
-        animation: animateStrokeDiagonal 1s forwards;
+        width: 33.4rem;
         transform: rotate(135deg);
       }
     }
   }
-}
-
-@keyframes animateStroke {
-  from { width: 0; }
-  to { width: 24rem; }
-}
-
-@keyframes animateStrokeDiagonal {
-  from { width: 0; }
-  to { width: 33.4rem; }
 }

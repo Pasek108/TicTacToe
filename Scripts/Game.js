@@ -222,7 +222,7 @@ class Standard extends Game {
   constructor(versus_id, player1_starts, maximalize) {
     super(versus_id, maximalize);
 
-    if (this.versus_id == 0) this.computer_enemy = new ComputerEnemy("alfabeta", maximalize);
+    if (this.versus_id == 0) this.computer_enemy = new ComputerEnemy("alphabeta", maximalize);
     this.size = 3;
     this.board = new Board(this.size, this.playerMove.bind(this));
     this.initGameState();
@@ -242,7 +242,7 @@ class Other1 extends Game {
   constructor(versus_id, player1_starts, maximalize) {
     super(versus_id, maximalize);
 
-    if (this.versus_id == 0) this.computer_enemy = new ComputerEnemy("alfabeta", maximalize);
+    if (this.versus_id == 0) this.computer_enemy = new ComputerEnemy("alphabeta", maximalize);
     this.size = 3;
     this.board = new Board(this.size, this.playerMove.bind(this));
     this.initGameState();
@@ -267,7 +267,7 @@ class Other2 extends Game {
   constructor(versus_id, player1_starts, maximalize) {
     super(versus_id, maximalize);
 
-    if (this.versus_id == 0) this.computer_enemy = new ComputerEnemy("modified_alfabeta", maximalize);
+    if (this.versus_id == 0) this.computer_enemy = new ComputerEnemy("modified_alphabeta", maximalize);
     this.options = ["X", "X"];
     this.size = 4;
     this.board = new Board(this.size, this.playerMove.bind(this));
