@@ -5,6 +5,8 @@
   font-family: "Varela Round", sans-serif;
   letter-spacing: 0.05em;
   box-sizing: border-box;
+  border: none;
+  color: inherit;
 }
 
 body {
@@ -19,7 +21,7 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 2rem;
-  background-color: #2f3640;
+  background: #2f3640;
   color: white;
   text-align: center;
 }
@@ -33,6 +35,16 @@ h2 {
   margin-bottom: 1rem;
   font-size: 2rem;
   font-weight: bold;
+}
+
+a {
+  font-size: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .square-btn {
@@ -51,6 +63,11 @@ h2 {
     border: 2px solid white;
     background: #192a56;
   }
+
+  &:disabled {
+    background-color: #4b4c50;
+    pointer-events: none;
+  }
 }
 
 .rect-btn {
@@ -65,5 +82,10 @@ h2 {
 
   &:hover {
     background: #192a56;
+  }
+
+  &:disabled {
+    background-color: #4b4c50;
+    pointer-events: none;
   }
 }

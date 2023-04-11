@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-control" content="public" />
+
+    <title>TicTacToe - Multiplayer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" />
+
+    <link rel="stylesheet" href="static/style/global.css" />
+    <link rel="stylesheet" href="static/style/menu.css" />
+    <link rel="stylesheet" href="static/style/game.css" />
+    <link rel="stylesheet" href="static/style/multiplayer.css" />
+  </head>
+
+  <body>
+    <!-- -------------- header -------------- -->
+    <header>
+      <h1><a href="/">TicTacToe</a></h1>
+    </header>
+
+    <!-- -------------- lobby -------------- -->
+    <div class="lobby">
+      <h2>Multiplayer</h2>
+
+      <div class="header">
+        <table>
+          <tr>
+            <th class="id">Id</th>
+            <th class="mode">Tryb</th>
+            <th class="players"><i class="fa-solid fa-user"></i></th>
+            <th class="button"></th>
+          </tr>
+        </table>
+      </div>
+
+      <div class="rooms">
+        <table>
+          <!--
+          <tr>
+            <td class="id">100</td>
+            <td class="mode">Normalny XO 3x3 Standardowy</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Przesuwany XO 3x3 Standardowy</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Jeden znak X 4x4 Odwrócony</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Normalny XO 3x3</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Normalny XO 3x3</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Normalny XO 3x3</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Normalny XO 3x3</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Normalny XO 3x3</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="id">1</td>
+            <td class="mode">Normalny XO 3x3</td>
+            <td class="players">1/2</td>
+            <td class="button">
+              <button class="rect-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </td>
+          </tr>
+          -->
+        </table>
+      </div>
+
+      <button class="rect-btn create-room">
+        <i class="fa-solid fa-plus"></i>
+        Utwórz pokój
+      </button>
+
+      <div class="create-game-modal" style="display: none">
+        <h2>Utwórz nową gre</h2>
+        <div class="close">X</div>
+
+        <select name="mode" id="">
+          <option value="normal">Normalny XO 3x3</option>
+          <option value="movable">Przesuwany XO 3x3</option>
+          <option value="one_mark">Jeden znak X 4x4</option>
+        </select>
+
+        <div class="checkbox">
+          <label for="reverse">Odwrócony</label>
+          <input type="checkbox" id="reverse" name="reverse" />
+        </div>
+
+        <div class="checkbox">
+          <label>Zacznij jako:</label>
+
+          <div class="radio">
+            <input type="radio" name="start" id="p1" checked />
+            <label for="p1">P1</label>
+          </div>
+
+          <div class="radio">
+            <input type="radio" name="start" id="p2" />
+            <label for="p2">P2</label>
+          </div>
+        </div>
+
+        <button class="rect-btn">Utwórz</button>
+      </div>
+    </div>
+
+    <!-- -------------- game -------------- -->
+    <div class="game" style="display: none">
+      <h2 class="message"></h2>
+
+      <div class="players">
+        <div class="p1"><i class="fa-solid fa-user"></i> P1 - <span class="p1-mark">X</span></div>
+        <div>Grasz jako P<span class="player-start">1</span></div>
+        <div class="p1"><i class="fa-solid fa-user"></i> P2 - <span class="p2-mark">O</span></div>
+      </div>
+
+      <div class="board"></div>
+
+      <div class="buttons">
+        <a href="/multiplayer" class="rect-btn quit">Wyjdź</a>
+        <button class="rect-btn replay" disabled>Zagraj ponownie</button>
+      </div>
+    </div>
+
+    <!-- -------------- footer -------------- -->
+    <footer>
+      Artur Pas 2023 <a href="https://github.com/Pasek108/TicTacToe"><i class="fa-brands fa-github"></i></a>
+    </footer>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <script src="static/scripts/ComputerEnemy.js"></script>
+    <script src="static/scripts/Board.js"></script>
+    <script src="static/scripts/Game.js"></script>
+    <script src="static/scripts/NormalMode.js"></script>
+    <script src="static/scripts/MovableMode.js"></script>
+    <script src="static/scripts/OneMarkMode.js"></script>
+    <script src="static/scripts/Multiplayer.js"></script>
+    <script src="static/scripts/Lobby.js"></script>
+    <script src="static/scripts/global.js"></script>
+  </body>
+</html>

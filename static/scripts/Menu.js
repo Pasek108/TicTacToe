@@ -27,9 +27,9 @@ class Menu {
     this.type_options.forEach((option, id) => {
       option.addEventListener("click", (evt) => {
         switch (this.gamemode_id) {
-          case 0: this.game = new Standard(this.versus_id, !this.player_id, !id); break;
-          case 1: this.game = new Other1(this.versus_id, !this.player_id, !id); break;
-          case 2: this.game = new Other2(this.versus_id, !this.player_id, !id); break;
+          case 0: this.game = new NormalMode(this.versus_id, !this.player_id, !id); break;
+          case 1: this.game = new MovableMode(this.versus_id, !this.player_id, !id); break;
+          case 2: this.game = new OneMarkMode(this.versus_id, !this.player_id, !id); break;
         }
 
         this.hide();
@@ -66,3 +66,5 @@ class Menu {
     this.player_id = +option.dataset.id;
   }
 }
+
+const menu = new Menu();

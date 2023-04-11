@@ -11,11 +11,7 @@ class ComputerEnemy {
       case "random": return this.random(game);
       case "minimax": return this.minimax(this.maximalize, game)[1];
       case "alphabeta": return this.alphabeta(this.maximalize, game)[1];
-      case "modified_alphabeta": {
-        if (game.availableMoves().length > 11) {
-          return this.maximalize ? this.makeLine(game) : this.avoidLine(game);
-        } else return this.alphabeta(this.maximalize, game)[1];
-      }
+      case "one_mark_4x4": return this.oneMark4x4(this.maximalize, game);
     }
   }
 
@@ -76,6 +72,11 @@ class ComputerEnemy {
   }
 
   /* -------------------- Only X algorithms -------------------- */
+  oneMark4x4(maximalize, game) {
+    if (game.availableMoves().length <= 11) return this.alphabeta(maximalize, game)[1];
+    return maximalize ? this.makeLine(game) : this.avoidLine(game);
+  }
+
   avoidLine(game) {
     const moves = game.availableMoves();
     let weights = [

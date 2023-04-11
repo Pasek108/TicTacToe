@@ -1,0 +1,143 @@
+@import "helper_mixins";
+
+.lobby {
+  width: 40rem;
+  max-width: 100%;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  button {
+    @include flex(row, center, center);
+    min-width: 10rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    i {
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .rooms {
+    height: 50vh;
+    overflow-y: scroll;
+  }
+
+  .header tr {
+    height: 3rem;
+    background: none;
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 0 0.5rem;
+  }
+
+  tr {
+    width: 100%;
+    margin: 0.5rem 0;
+    background: #1e2228;
+
+    th,
+    td {
+      text-align: left;
+      padding: 0 0.5rem;
+    }
+
+    th {
+      border-bottom: 1px solid white;
+
+      &.button {
+        min-width: 4.25rem;
+      }
+    }
+
+    th:first-of-type,
+    td:first-of-type {
+      padding-left: 1rem;
+    }
+
+    th:last-of-type,
+    td:last-of-type {
+      padding-right: 1rem;
+    }
+
+    td button {
+      float: right;
+      min-width: 2rem;
+      padding: 0.8rem 0.25rem 0.7rem 0.75rem;
+      background: #077707;
+
+      &:hover {
+        background: #1a5619;
+      }
+    }
+  }
+
+  .id {
+    width: 4rem;
+  }
+
+  .mode {
+    width: 19rem;
+  }
+
+  .players {
+    width: 3rem;
+    text-align: center;
+  }
+}
+
+.create-game-modal {
+  @include position(fixed, 35%, calc(50% - 12.5rem));
+  @include flex(column, flex-start, center);
+  width: 25rem;
+  padding: 1rem 2rem;
+  border: 1px solid white;
+  border-radius: 1rem;
+  background: #1e2228;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .close {
+    @include position(absolute, 1.1rem, 2rem);
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+        color: #ffcc00;
+    }
+  }
+
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    color: black;
+  }
+
+  .checkbox {
+    @include flex(row, center, space-between);
+    margin-bottom: 1rem;
+  }
+
+  .radio {
+    @include flex(row, center, space-between);
+
+    input {
+        margin: 0 0.25rem 0 0.5rem;
+    }
+  }
+  
+  button {
+    width: 100%;
+  }
+}

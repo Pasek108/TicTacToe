@@ -51,15 +51,15 @@ class Board {
     this.tiles[x][y].innerText = mark;
   }
 
-  lightUpMarks(mark) {
-    for (let i = 0; i < this.size; i++) {
-      for (let j = 0; j < this.size; j++) {
-        if (this.tiles[i][j].innerText == mark) this.tiles[i][j].style.background = "#35bc43";
-      }
-    }
+  removeMark(x, y) {
+    this.tiles[x][y].innerText = "";
   }
 
-  resetLight() {
+  lightUpTile(x, y, color) {
+    this.tiles[x][y].style.background = color;
+  }
+
+  resetLightUps() {
     for (let i = 0; i < this.size; i++) {
       for (let j = 0; j < this.size; j++) this.tiles[i][j].style.background = null;
     }
