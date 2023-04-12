@@ -1,9 +1,6 @@
 @import "helper_mixins";
 
-.game {
-}
-
-.message {
+.game .message {
   margin: 0;
   margin-bottom: 2rem;
   font-size: 2rem;
@@ -14,7 +11,7 @@
   @include flex(row, center, space-between);
   min-width: 22rem;
   max-width: 100%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-size: 1rem;
   font-weight: bold;
 }
@@ -34,7 +31,7 @@
 
   .tile {
     @include flex(row, center, center);
-    padding-top: 0.4rem;
+    padding: 0.4rem 0 0 0.25rem;
     background-color: gray;
     font-size: 5rem;
     font-weight: bold;
@@ -42,7 +39,7 @@
   }
 
   .stroke {
-    @include position(absolute, -1rem, $left: -1rem);
+    @include position(absolute, -0.75rem, $left: -0.75rem);
     height: 0.5rem;
     width: 0;
     border-radius: 9999rem;
@@ -50,24 +47,25 @@
     transform-origin: 0 0;
     transition: width 1s 0.25s;
 
-    &.horizontal.draw { width: 24rem; }
-    &.vertical.draw { width: 24rem; }
+    &.horizontal.draw { width: 23.5rem; }
+    &.vertical.draw { width: 23.5rem; }
 
     &.diagonal-left-to-right {
-      left: -0.65rem;
+      top: -0.78rem;
+      left: -0.44rem;
 
       &.draw {
-        width: 33.4rem;
+        width: 32.9rem;
         transform: rotate(45deg);
       }
     }
 
     &.diagonal-right-to-left {
-      top: -0.55rem;
-      left: 22.95rem;
+      top: -0.48rem;
+      left: 22.85rem;
 
       &.draw {
-        width: 33.4rem;
+        width: 32.9rem;
         transform: rotate(135deg);
       }
     }

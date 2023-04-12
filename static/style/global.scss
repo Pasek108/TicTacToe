@@ -1,12 +1,16 @@
 @import "helper_mixins";
 
 * {
-  font-size: 14px;
   font-family: "Varela Round", sans-serif;
   letter-spacing: 0.05em;
   box-sizing: border-box;
   border: none;
   color: inherit;
+  font-size: inherit;
+}
+
+html {
+  font-size: 14px;
 }
 
 body {
@@ -28,6 +32,14 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+html:lang(pl) span.en, html:lang(en) span.pl {
+  display: none;
+}
+
+span {
+  font-size: inherit;
 }
 
 h2 {

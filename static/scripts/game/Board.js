@@ -73,7 +73,7 @@ class Board {
 
   drawVerticalStroke(id) {
     this.strokes[1].classList.add(`draw`);
-    this.strokes[1].style.left = `${(21 / (2 * this.size)) + 0.125}rem`;
+    this.strokes[1].style.left = `${(21 / (2 * this.size)) + 0.25}rem`;
     this.strokes[1].style.transform = `translateX(${id * 22.5 / this.size}rem) rotate(90deg)`;
   }
 

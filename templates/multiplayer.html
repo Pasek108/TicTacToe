@@ -6,23 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="Cache-control" content="public" />
 
-    <title>TicTacToe - Multiplayer</title>
+    <title>TicTacToe</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" />
 
-    <link rel="stylesheet" href="static/style/global.css" />
-    <link rel="stylesheet" href="static/style/menu.css" />
-    <link rel="stylesheet" href="static/style/game.css" />
-    <link rel="stylesheet" href="static/style/multiplayer.css" />
+    <link rel="stylesheet" href="static/style/css/global.css" />
+    <link rel="stylesheet" href="static/style/css/header.css" />
+    <link rel="stylesheet" href="static/style/css/menu.css" />
+    <link rel="stylesheet" href="static/style/css/multiplayer.css" />
+    <link rel="stylesheet" href="static/style/css/game.css" />
   </head>
 
   <body>
     <!-- -------------- header -------------- -->
     <header>
       <h1><a href="/">TicTacToe</a></h1>
+      <div class="language">
+        <img class="active-lang-img" src="static/images/pl.png" alt="polish-flag" />
+        <div class="arrow"><i class="fa-solid fa-angle-up"></i></div>
+
+        <div class="languages-list">
+          <div data-lang="pl">
+            <img src="static/images/pl.png" alt="polish-flag" />
+            <span>PL</span>
+          </div>
+
+          <div data-lang="en">
+            <img src="static/images/en.png" alt="english-flag" />
+            <span>EN</span>
+          </div>
+        </div>
+      </div>
     </header>
 
     <!-- -------------- lobby -------------- -->
@@ -42,7 +59,7 @@
 
       <div class="rooms">
         <table>
-          <!--
+          
           <tr>
             <td class="id">100</td>
             <td class="mode">Normalny XO 3x3 Standardowy</td>
@@ -141,7 +158,7 @@
               </button>
             </td>
           </tr>
-          -->
+          
         </table>
       </div>
 
@@ -185,19 +202,45 @@
 
     <!-- -------------- game -------------- -->
     <div class="game" style="display: none">
-      <h2 class="message"></h2>
+      <h2>
+        <div class="current-turn message">
+          <span class="pl">Kolej gracza <span class="player-turn">1</span></span>
+          <span class="en">Player <span class="player-turn">1</span> turn</span>
+        </div>
+
+        <div class="winner message hidden">
+          <span class="pl">Wygrał gracz <span class="player-win">1</span></span>
+          <span class="en">Player <span class="player-win">1</span> win</span>
+        </div>
+
+        <div class="draw message hidden">
+          <span class="pl">Remis</span>
+          <span class="en">Draw</span>
+        </div>
+      </h2>
 
       <div class="players">
         <div class="p1"><i class="fa-solid fa-user"></i> P1 - <span class="p1-mark">X</span></div>
-        <div>Grasz jako P<span class="player-start">1</span></div>
+        <div>
+          <span class="pl">Grasz jako</span>
+          <span class="en">You play as</span>
+          <span class="player-start">P1</span>
+        </div>
         <div class="p1"><i class="fa-solid fa-user"></i> P2 - <span class="p2-mark">O</span></div>
       </div>
 
       <div class="board"></div>
 
       <div class="buttons">
-        <a href="/multiplayer" class="rect-btn quit">Wyjdź</a>
-        <button class="rect-btn replay" disabled>Zagraj ponownie</button>
+        <a href="/" class="rect-btn quit">
+          <span class="pl">Wyjdź</span>
+          <span class="en">Quit</span>
+        </a>
+
+        <button class="rect-btn replay" disabled>
+          <span class="pl">Zagraj ponownie</span>
+          <span class="en">Replay</span>
+        </button>
       </div>
     </div>
 
@@ -207,13 +250,13 @@
     </footer>
 
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
-    <script src="static/scripts/ComputerEnemy.js"></script>
-    <script src="static/scripts/Board.js"></script>
-    <script src="static/scripts/Game.js"></script>
-    <script src="static/scripts/NormalMode.js"></script>
-    <script src="static/scripts/MovableMode.js"></script>
-    <script src="static/scripts/OneMarkMode.js"></script>
-    <script src="static/scripts/Multiplayer.js"></script>
+    <script src="static/scripts/game/ComputerEnemy.js"></script>
+    <script src="static/scripts/game/Board.js"></script>
+    <script src="static/scripts/game/Game.js"></script>
+    <script src="static/scripts/game/NormalMode.js"></script>
+    <script src="static/scripts/game/MovableMode.js"></script>
+    <script src="static/scripts/game/OneMarkMode.js"></script>
+    <script src="static/scripts/Language.js"></script>
     <script src="static/scripts/Lobby.js"></script>
     <script src="static/scripts/global.js"></script>
   </body>

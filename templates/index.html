@@ -13,9 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" />
 
-    <link rel="stylesheet" href="static/style/global.css" />
-    <link rel="stylesheet" href="static/style/menu.css" />
-    <link rel="stylesheet" href="static/style/game.css" />
+    <link rel="stylesheet" href="static/style/css/global.css" />
+    <link rel="stylesheet" href="static/style/css/header.css" />
+    <link rel="stylesheet" href="static/style/css/menu.css" />
+    <link rel="stylesheet" href="static/style/css/game.css" />
   </head>
 
   <body>
@@ -23,17 +24,17 @@
     <header>
       <h1><a href="/">TicTacToe</a></h1>
       <div class="language">
-        <img class="active-lang-img" src="static/images/pl.png" alt="polish-flag">
+        <img class="active-lang-img" src="static/images/pl.png" alt="polish-flag" />
         <div class="arrow"><i class="fa-solid fa-angle-up"></i></div>
 
         <div class="languages-list">
-          <div>
-            <img src="static/images/pl.png" alt="polish-flag">
+          <div data-lang="pl">
+            <img src="static/images/pl.png" alt="polish-flag" />
             <span>PL</span>
           </div>
 
-          <div>
-            <img src="static/images/en.png" alt="english-flag">
+          <div data-lang="en">
+            <img src="static/images/en.png" alt="english-flag" />
             <span>EN</span>
           </div>
         </div>
@@ -44,65 +45,131 @@
     <div class="menu">
       <div class="step1">
         <h2>
-          <span class="pl">Zagraj z komputerem</span>
-          <span class="en">Play with computer</span>
+          <div class="play-vs-computer message">
+            <span class="pl">Zagraj z komputerem</span>
+            <span class="en">Play with computer</span>
+          </div>
+
+          <div class="play-vs-player message hidden">
+            <span class="pl">Zagraj z graczem na jednym urządzeniu</span>
+            <span class="en">Play with a player on one device</span>
+          </div>
         </h2>
-  
+
         <div class="versus">
-          <button class="square-btn option active" data-id="0" data-message="Zagraj z komputerem"><i class="fa-solid fa-desktop"></i></button>
-          <button class="square-btn option" data-id="1" data-message="Zagraj z graczem na jednym urządzeniu"><i class="fa-solid fa-user"></i></button>
+          <button class="square-btn option active" data-id="0"><i class="fa-solid fa-desktop"></i></button>
+          <button class="square-btn option" data-id="1"><i class="fa-solid fa-user"></i></button>
           <a href="/multiplayer" class="square-btn"><i class="fa-solid fa-users"></i></a>
         </div>
-  
+
         <div class="gamemode">
-          <button class="rect-btn option" data-id="0">Normalny XO 3x3</button>
-          <button class="rect-btn option" data-id="1">Przesuwany XO 3x3</button>
-          <button class="rect-btn option" data-id="2">Jeden znak X 4x4</button>
+          <button class="rect-btn option" data-id="0">
+            <span class="pl">Normalny XO 3x3</span>
+            <span class="en">Normal XO 3x3</span>
+          </button>
+
+          <button class="rect-btn option" data-id="1">
+            <span class="pl">Przesuwany XO 3x3</span>
+            <span class="en">Movable XO 3x3</span>
+          </button>
+
+          <button class="rect-btn option" data-id="2">
+            <span class="pl">Jeden znak X 4x4</span>
+            <span class="en">One mark X 4x4</span>
+          </button>
         </div>
       </div>
 
-      <div class="step2" style="display: none;">
-        <h2>Zacznij jako</h2>
+      <div class="step2" style="display: none">
+        <h2>
+          <span class="pl">Zacznij jako</span>
+          <span class="en">Start as</span>
+        </h2>
 
         <div class="player">
-          <button class="square-btn option active" data-id="0"><i class="fa-solid fa-circle-user"></i> Gracz 1</button>
-          <button class="square-btn option" data-id="1"><i class="fa-solid fa-circle-user"></i> Gracz 2</button>
+          <button class="square-btn option active" data-id="0">
+            <i class="fa-solid fa-circle-user"></i>
+            <span class="pl">Gracz 1</span>
+            <span class="en">Player 1</span>
+          </button>
+
+          <button class="square-btn option" data-id="1">
+            <i class="fa-solid fa-circle-user"></i>
+            <span class="pl">Gracz 2</span>
+            <span class="en">Player 2</span>
+          </button>
         </div>
-  
+
         <div class="type">
-          <button class="rect-btn option">Standardowy</button>
-          <button class="rect-btn option">Odwrócony</button>
+          <button class="rect-btn option" data-id="0">
+            <span class="pl">Standardowy</span>
+            <span class="en">Standard</span>
+          </button>
+
+          <button class="rect-btn option" data-id="1">
+            <span class="pl">Odwrócony</span>
+            <span class="en">Reverse</span>
+          </button>
         </div>
       </div>
     </div>
 
     <!-- -------------- game -------------- -->
     <div class="game" style="display: none">
-      <h2 class="message"></h2>
+      <h2>
+        <div class="current-turn message">
+          <span class="pl">Kolej gracza <span class="player-turn">1</span></span>
+          <span class="en">Player <span class="player-turn">1</span> turn</span>
+        </div>
+
+        <div class="winner message hidden">
+          <span class="pl">Wygrał gracz <span class="player-win">1</span></span>
+          <span class="en">Player <span class="player-win">1</span> win</span>
+        </div>
+
+        <div class="draw message hidden">
+          <span class="pl">Remis</span>
+          <span class="en">Draw</span>
+        </div>
+      </h2>
 
       <div class="players">
         <div class="p1"><i class="fa-solid fa-user"></i> P1 - <span class="p1-mark">X</span></div>
-        <div>Grasz jako P<span class="player-start">1</span></div>
+        <div>
+          <span class="pl">Grasz jako</span>
+          <span class="en">You play as</span>
+          <span class="player-start">P1</span>
+        </div>
         <div class="p1"><i class="fa-solid fa-user"></i> P2 - <span class="p2-mark">O</span></div>
       </div>
 
       <div class="board"></div>
 
       <div class="buttons">
-        <a href="/" class="rect-btn quit">Wyjdź</a>
-        <button class="rect-btn replay" disabled>Zagraj ponownie</button>
+        <a href="/" class="rect-btn quit">
+          <span class="pl">Wyjdź</span>
+          <span class="en">Quit</span>
+        </a>
+
+        <button class="rect-btn replay" disabled>
+          <span class="pl">Zagraj ponownie</span>
+          <span class="en">Replay</span>
+        </button>
       </div>
     </div>
 
     <!-- -------------- footer -------------- -->
-    <footer>Artur Pas 2023 <a href="https://github.com/Pasek108/TicTacToe"><i class="fa-brands fa-github"></i></a></footer>
+    <footer>
+      Artur Pas 2023 <a href="https://github.com/Pasek108/TicTacToe"><i class="fa-brands fa-github"></i></a>
+    </footer>
 
-    <script src="static/scripts/ComputerEnemy.js"></script>
-    <script src="static/scripts/Board.js"></script>
-    <script src="static/scripts/Game.js"></script>
-    <script src="static/scripts/NormalMode.js"></script>
-    <script src="static/scripts/MovableMode.js"></script>
-    <script src="static/scripts/OneMarkMode.js"></script>
+    <script src="static/scripts/game/ComputerEnemy.js"></script>
+    <script src="static/scripts/game/Board.js"></script>
+    <script src="static/scripts/game/Game.js"></script>
+    <script src="static/scripts/game/NormalMode.js"></script>
+    <script src="static/scripts/game/MovableMode.js"></script>
+    <script src="static/scripts/game/OneMarkMode.js"></script>
+    <script src="static/scripts/Language.js"></script>
     <script src="static/scripts/Menu.js"></script>
     <script src="static/scripts/global.js"></script>
   </body>

@@ -20,6 +20,6 @@ class NormalMode extends Game {
 
     this.p1_mark.innerText = this.options[0];
     this.p2_mark.innerText = this.options[1];
-    this.player_start.innerText = +(!player1_starts) + 1;
+    this.player_start.innerText = `P${+(!player1_starts) + 1}`;
   }
 }

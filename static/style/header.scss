@@ -1,0 +1,74 @@
+@import "helper_mixins";
+
+body > header {
+  @include position(fixed, 0, $zindex: 10);
+  @include flex(row, center, center);
+  width: 100%;
+  padding: 0.5rem;
+  background: #1e2228;
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  .language {
+    @include position(relative, $zindex: 0);
+    @include flex(row, center, space-between);
+    height: 2.5rem;
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 0.5rem;
+    background: #2f3640;
+    cursor: pointer;
+
+    &:hover {
+      background: #454b54;
+    }
+
+    img {
+      height: 90%;
+    }
+
+    i {
+      margin-left: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    &.active {
+      .arrow {
+        transform: rotateX(180deg);
+      }
+
+      .languages-list {
+        display: initial;
+      }
+    }
+  }
+
+  .languages-list {
+    @include position(absolute, 0, 0, $zindex: -1);
+    @include flex(column, center, center);
+    width: 100%;
+    padding: 2.5rem 0 0 0;
+    border-radius: 0.5rem;
+    background: #454b54;
+    display: none;
+
+    div {
+      @include flex(row, center, space-between);
+      height: 2.5rem;
+      width: 100%;
+      padding: 0 0.5rem;
+
+      &:hover {
+        background: #192a56;
+      }
+
+      span {
+        margin-left: 0.45rem;
+        font-size: 1rem;
+      }
+    }
+  }
+}
