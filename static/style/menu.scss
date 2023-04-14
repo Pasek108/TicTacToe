@@ -1,8 +1,11 @@
 @import "helper_mixins";
 
+.menu {
+  margin: 5rem 0 3rem 0;
+}
+
 .step1 {
   @include flex(column, center, flex-start);
-  margin: 4rem 0;
 
   .versus-type {
     h2 {
@@ -27,7 +30,6 @@
 
 .step2 {
   @include flex(column, center, flex-start);
-  margin: 4rem 0;
 
   .player {
     @include flex(row, center, center);
@@ -55,7 +57,7 @@
 
 /* ---------------------------- footer ---------------------------- */
 footer {
-  @include position(fixed, $bottom: 0);
+  @include position(sticky, $top: 100vh);
   @include flex(row, center, center);
   padding: 0.5rem;
   font-size: 1.25rem;

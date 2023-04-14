@@ -25,6 +25,7 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 2rem;
+  padding-bottom: 0;
   background: #2f3640;
   color: white;
   text-align: center;
@@ -34,7 +35,8 @@ body {
   display: none;
 }
 
-html:lang(pl) span.en, html:lang(en) span.pl {
+html:lang(pl) span.en,
+html:lang(en) span.pl {
   display: none;
 }
 

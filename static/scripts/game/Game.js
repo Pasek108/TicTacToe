@@ -1,27 +1,40 @@
 "use strict";
 
 class Game {
-  constructor(versus_id, maximalize) {
+  constructor(mode_id, versus_id, player_start_id, maximalize, options, size, enemy_algorithm) {
     this.container = document.querySelector(".game");
 
+    this.quit_button = this.container.querySelector(".quit");
+    this.quit_button.addEventListener("click", () => {
+      this.hide();
+      menu.show();
+    });
+
+    this.replay_button = this.container.querySelector(".replay");
+    this.replay_button.addEventListener("click", this.restart.bind(this));
+
+    // messages containers
     this.messages = this.container.querySelectorAll("h2 .message");
     this.player_turn = this.container.querySelectorAll(".player-turn");
     this.player_win = this.container.querySelectorAll(".player-win");
-    this.p1_mark = this.container.querySelector(".p1-mark");
-    this.p2_mark = this.container.querySelector(".p2-mark");
-    this.player_start = this.container.querySelector(".player-start");
 
-    this.versus_id = versus_id;
+    this.mode_id = mode_id;
+    this.is_computer_an_enemy = versus_id === 0;
+    this.player_start_id = player_start_id;
     this.maximalize = maximalize;
+    this.options = options;
+    this.size = size;
 
-    this.history = [];
-    this.game_end = false;
+    this.computer_enemy = new ComputerEnemy(enemy_algorithm, maximalize);
+    this.board = new Board(size, this.playerMove.bind(this));
+    this.moves_history = [];
+    this.is_game_over = false;
+    this.current_player_id = 0;
 
-    this.options = ["X", "O"];
-    this.start_option = 0;
-    this.current_option = this.start_option;
-
-    this.showMessage("turn");
+    this.initGameState();
+    this.loadGameInfo();
+    this.showMessage("current_turn");
+    this.show();
   }
 
   show() {
@@ -32,23 +45,46 @@ class Game {
     this.container.style.display = "none";
   }
 
-  showMessage(type) {
-    this.messages.forEach(message => message.classList.add("hidden"));
+  loadGameInfo() {
+    // load mark of player 1
+    this.p1_mark = this.container.querySelector(".p1-mark");
+    this.p1_mark.innerText = this.options[0];
 
-    switch(type) {
-      case "turn": {
+    // load mark of player 2
+    this.p2_mark = this.container.querySelector(".p2-mark");
+    this.p2_mark.innerText = this.options[1];
+
+    // load starting player
+    this.player_start = this.container.querySelector(".player-start");
+    this.player_start.innerText = `P${this.player_start_id + 1}`;
+
+    // load mode name
+    this.mode_names = this.container.querySelectorAll(".mode-name");
+    this.mode_names.forEach((mode) => mode.classList.add("hidden"));
+    this.mode_names[this.mode_id].classList.remove("hidden");
+
+    // load mode type
+    this.type_names = this.container.querySelectorAll(".type-name");
+    this.type_names.forEach((type) => type.classList.add("hidden"));
+    this.type_names[+!this.maximalize].classList.remove("hidden");
+  }
+
+  showMessage(type) {
+    this.messages.forEach((message) => message.classList.add("hidden"));
+
+    switch (type) {
+      case "current_turn": {
         this.messages[0].classList.remove("hidden");
-        this.player_turn.forEach(player => player.innerText = this.current_option + 1); 
+        this.player_turn.forEach((player) => (player.innerText = this.current_player_id + 1));
       } break;
 
-      case "win": {
+      case "winner": {
         this.messages[1].classList.remove("hidden");
-        this.player_win.forEach(player => player.innerText = +(this.maximalize ? !this.current_option : this.current_option) + 1); 
+        this.player_win.forEach((player) => (player.innerText = +(this.maximalize ? !this.current_player_id : this.current_player_id) + 1));
       } break;
 
       case "draw": this.messages[2].classList.remove("hidden"); break;
     }
-    
   }
 
   initGameState() {
@@ -60,70 +96,56 @@ class Game {
     }
   }
 
-  playerMove(x, y) {
-    if (this.versus_id == 0 && this.start_option != this.current_option) return;
-    if (this.game_state[x][y] != "") return;
+  restart() {
+    this.initGameState();
+    this.board = new Board(this.size, this.playerMove.bind(this));
+    this.replay_button.disabled = true;
 
-    this.board.placeMark(x, y, this.options[this.current_option]);
+    this.moves_history = [];
+    this.is_game_over = false;
+    this.current_player_id = 0;
+
+    this.showMessage("current_turn");
+    if (this.is_computer_an_enemy && this.player_start_id === 1) this.computerMove();
+  }
+
+  playerMove(x, y) {
+    if (this.is_computer_an_enemy && this.player_start_id != this.current_player_id) return;
+    if (this.is_game_over || this.game_state[x][y] != "") return;
+
+    this.board.placeMark(x, y, this.options[this.current_player_id]);
     this.makeMove(x, y);
     if (this.checkIfGameOver(false)) return;
 
-    this.showMessage("turn");
-    if (this.versus_id == 0) this.computerMove();
+    this.showMessage("current_turn");
+    if (this.is_computer_an_enemy) this.computerMove();
   }
 
   computerMove() {
-    const ai_move_positions = this.computer_enemy.calculateMove(this, this.maximalize);
+    const move = this.computer_enemy.calculateMove(this);
 
     setTimeout(() => {
-      this.board.placeMark(ai_move_positions[0], ai_move_positions[1], this.options[this.current_option]);
-      this.makeMove(ai_move_positions[0], ai_move_positions[1]);
+      this.board.placeMark(move[0], move[1], this.options[this.current_player_id]);
+      this.makeMove(move[0], move[1]);
+
       if (this.checkIfGameOver(false)) return;
 
-      this.showMessage("turn");
+      this.showMessage("current_turn");
     }, 500);
   }
 
   makeMove(x, y) {
-    this.history.push([x, y]);
-    this.game_state[x][y] = this.options[this.current_option];
-    this.current_option = +!this.current_option;
+    this.moves_history.push([x, y]);
+    this.game_state[x][y] = this.options[this.current_player_id];
+    this.current_player_id = +!this.current_player_id;
   }
 
   back() {
-    const last_action = this.history.pop();
+    const last_action = this.moves_history.pop();
     this.game_state[last_action[0]][last_action[1]] = "";
-    this.current_option = +!this.current_option;
+    this.current_player_id = +!this.current_player_id;
 
     return last_action;
-  }
-
-  result() {
-    const last_action = this.history[this.history.length - 1];
-
-    const win_row_id = this.winnerRowId();
-    if (win_row_id >= 0) {
-      if (this.isWonByStartingPlayer(win_row_id, 0)) return [-1, last_action];
-      else return [1, last_action];
-    }
-
-    const win_col_id = this.winnerColumnId();
-    if (win_col_id >= 0) {
-      if (this.isWonByStartingPlayer(0, win_col_id)) return [-1, last_action];
-      else return [1, last_action];
-    }
-
-    const win_diag_id = this.winnerDiagonalId();
-    if (win_diag_id >= 0) {
-      if (this.isWonByStartingPlayer(win_diag_id * 2, 0)) return [-1, last_action];
-      else return [1, last_action];
-    }
-
-    return [0, last_action];
-  }
-
-  isWonByStartingPlayer(x, y) {
-    return this.game_state[x][y] == this.options[this.start_option]
   }
 
   availableMoves() {
@@ -145,7 +167,7 @@ class Game {
     if (win_row_id >= 0) {
       if (!only_result) {
         this.board.drawHorizontalStroke(win_row_id);
-        this.showMessage("win");
+        this.showMessage("winner");
         this.gameOver();
       }
       return true;
@@ -157,7 +179,7 @@ class Game {
     if (win_col_id >= 0) {
       if (!only_result) {
         this.board.drawVerticalStroke(win_col_id);
-        this.showMessage("win");
+        this.showMessage("winner");
         this.gameOver();
       }
       return true;
@@ -169,7 +191,7 @@ class Game {
     if (win_diag_id >= 0) {
       if (!only_result) {
         this.board.drawDiagonalStroke(win_diag_id);
-        this.showMessage("win");
+        this.showMessage("winner");
         this.gameOver();
       }
       return true;
@@ -246,6 +268,35 @@ class Game {
 
   gameOver() {
     this.board.block();
-    this.game_end = true;
+    this.is_game_over = true;
+    this.replay_button.disabled = false;
+  }
+
+  result() {
+    const last_action = this.moves_history[this.moves_history.length - 1];
+
+    const win_row_id = this.winnerRowId();
+    if (win_row_id >= 0) {
+      if (this.isWonByStartingPlayer(win_row_id, 0)) return [-1, last_action];
+      else return [1, last_action];
+    }
+
+    const win_col_id = this.winnerColumnId();
+    if (win_col_id >= 0) {
+      if (this.isWonByStartingPlayer(0, win_col_id)) return [-1, last_action];
+      else return [1, last_action];
+    }
+
+    const win_diag_id = this.winnerDiagonalId();
+    if (win_diag_id >= 0) {
+      if (this.isWonByStartingPlayer(win_diag_id * 2, 0)) return [-1, last_action];
+      else return [1, last_action];
+    }
+
+    return [0, last_action];
+  }
+
+  isWonByStartingPlayer(x, y) {
+    return this.game_state[x][y] == this.options[this.player_start_id];
   }
 }

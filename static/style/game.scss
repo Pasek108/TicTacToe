@@ -1,5 +1,9 @@
 @import "helper_mixins";
 
+.game {
+  margin: 5rem 0 3rem 0;
+}
+
 .game .message {
   margin: 0;
   margin-bottom: 2rem;
@@ -31,9 +35,7 @@
 
   .tile {
     @include flex(row, center, center);
-    padding: 0.4rem 0 0 0.25rem;
     background-color: gray;
-    font-size: 5rem;
     font-weight: bold;
     cursor: pointer;
   }
@@ -47,8 +49,12 @@
     transform-origin: 0 0;
     transition: width 1s 0.25s;
 
-    &.horizontal.draw { width: 23.5rem; }
-    &.vertical.draw { width: 23.5rem; }
+    &.horizontal.draw {
+      width: 23.5rem;
+    }
+    &.vertical.draw {
+      width: 23.5rem;
+    }
 
     &.diagonal-left-to-right {
       top: -0.78rem;
@@ -72,6 +78,12 @@
   }
 }
 
+.game .mode {
+  @include flex(row, center, center);
+  gap: 0.25rem;
+  margin-top: 1rem;
+}
+
 .buttons {
   @include flex(row, center, center);
   gap: 0.5rem;
@@ -80,7 +92,8 @@
   margin-top: 1rem;
 }
 
-.quit, .replay {
+.quit,
+.replay {
   flex-grow: 1;
   padding: 0.75rem;
   font-size: 1.25rem;

@@ -33,6 +33,9 @@ class Menu {
 
   hide() {
     this.container.style.display = "none";
+    
+    this.step1.style.display = null;
+    this.step2.style.display =  "none";
   }
 
   changeVersusOption(evt) {
@@ -64,11 +67,12 @@ class Menu {
 
   loadGame(evt) {
     const option = evt.currentTarget;
+    const maximalize = !+option.dataset.id;
 
     switch (this.gamemode_id) {
-      case 0: this.game = new NormalMode(this.versus_id, !this.player_id, !+option.dataset.id); break;
-      case 1: this.game = new MovableMode(this.versus_id, !this.player_id, !+option.dataset.id); break;
-      case 2: this.game = new OneMarkMode(this.versus_id, !this.player_id, !+option.dataset.id); break;
+      case 0: this.game = new NormalMode(this.versus_id, this.player_id, maximalize); break;
+      case 1: this.game = new MovableMode(this.versus_id, this.player_id, maximalize); break;
+      case 2: this.game = new OneMarkMode(this.versus_id, this.player_id, maximalize); break;
     }
 
     this.hide();

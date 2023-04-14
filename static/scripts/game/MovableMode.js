@@ -1,29 +1,14 @@
 "use strict";
 
 class MovableMode extends Game {
-  constructor(versus_id, player1_starts, maximalize) {
-    super(versus_id, maximalize);
+  constructor(versus_id, player_start_id, maximalize) {
+    super(1, versus_id, player_start_id, maximalize, ["X", "O"], 3, "alphabeta");
 
-    if (this.versus_id == 0) this.computer_enemy = new ComputerEnemy("alphabeta", maximalize);
-    this.size = 3;
-    this.board = new Board(this.size, this.playerMove.bind(this));
-    this.initGameState();
     this.moves_counter = 0;
     this.pick_turn = false;
     this.pick = [];
-
-    this.show();
-
-    if (!player1_starts) {
-      if (this.versus_id == 0) {
-        this.start_option = 1;
-        this.computerMove();
-      }
-    }
-
-    this.p1_mark.innerText = this.options[0];
-    this.p2_mark.innerText = this.options[1];
-    this.player_start.innerText = `P${+(!player1_starts) + 1}`;
+    
+    if (this.is_computer_an_enemy && this.player_start_id === 1) this.computerMove();
   }
 
   playerMove(x, y) {
@@ -41,7 +26,7 @@ class MovableMode extends Game {
       const dist_y = Math.abs(y - this.pick[1]);
       if (this.game_state[x][y] === "" && dist_x + dist_y === 1) this.moveMark(x, y);
 
-      // reset all light ups and end if game over 
+      // reset all light ups and end if game over
       this.board.resetLightUps();
       if (this.checkIfGameOver(false)) return;
 
@@ -55,14 +40,17 @@ class MovableMode extends Game {
 
   availableMoves() {
     let moves = [];
-
+   
     for (let i = 0; i < this.size; i++) {
       for (let j = 0; j < this.size; j++) {
-        if (this.moves_counter >= 6) {
-          if (this.game_state[i][j] === this.options[this.current_option]) {
-            if (this.game_state[i][j - 1] === "" || this.game_state[i][j + 1] === "" || this.game_state[i - 1]?.[j] === "" || this.game_state[i + 1]?.[j] === "") moves.push([i, j]);
-          }
-        } else if (this.game_state[i][j] === "") moves.push([i, j]);
+        if (this.moves_counter < 6 && this.game_state[i][j] === "") moves.push([i, j]);
+        else if (this.moves_counter >= 6 && this.game_state[i][j] === this.options[this.current_player_id]) {
+          if (this.game_state[i]?.[j - 1] === "" || 
+              this.game_state[i]?.[j + 1] === "" || 
+              this.game_state[i - 1]?.[j] === "" || 
+              this.game_state[i + 1]?.[j] === "") 
+              moves.push([i, j]);
+        }
       }
     }
 
@@ -71,7 +59,7 @@ class MovableMode extends Game {
 
   pickMarkToMove(x, y) {
     // return if not current mark
-    if (this.game_state[x][y] != this.options[this.current_option]) return;
+    if (this.game_state[x][y] != this.options[this.current_player_id]) return;
 
     // light up possible movements
     if (this.game_state[x - 1]?.[y] === "") this.board.lightUpTile(x - 1, y, "#ffd100");
