@@ -1,20 +1,59 @@
 class Game:
-    def __init__(self, size):
+    def __init__(self, id, mode_id, type_id, starting_id, size, password, switch_sides, player_sid):
+        self.id = id
+        self.mode_id = mode_id
+        self.type_id = type_id
+        self.starting_id = starting_id
         self.size = size
+        self.password = password
+        self.switch_sides = switch_sides
+
+        self.players = ["", ""]
+        self.players[self.starting_id] = player_sid
         self.game_state = [[""]*size for j in range(size)]
-        self.options = ["X", "Y"]
-        self.current_option = 0
+        self.options = ["X", "O"]
+        self.current_player_id = 0
         self.game_over = False
 
-    def player_move(self, x, y):
-        if self.game_over:
-            return
+    def get_game_info(self, player_sid):
+        return {
+            "id": self.id,
+            "mode_id": self.mode_id,
+            "type_id": self.type_id,
+            "player_id": self.players.index(player_sid) if player_sid in self.players else -1,
+            "free_spaces": self.players.count(""),
+            "size": self.size,
+            "password": self.password,
+            "switch_sides": self.switch_sides,
+            "game_state": self.game_state
+        }
 
-        self.game_state[x][y] = self.options[self.current_option]
-        self.current_option = (self.current_option + 1) % 2
+    def player_leave(self, player_sid):
+        self.players[self.players.index(player_sid)] = ""
+
+        if self.players[0] == "" and self.players[1] == "":
+            return False
+
+        return True
+
+    def player_join(self, player_sid):
+        if "" not in self.players:
+            return False
+
+        self.players[self.players.index("")] = player_sid
+        return True
+
+    def player_move(self, x, y, player_id):
+        if self.game_over or self.game_state[x][y] != "" or self.current_player_id != player_id:
+            return False
+
+        self.game_state[x][y] = self.options[self.current_player_id]
+        self.current_player_id = (self.current_player_id + 1) % 2
 
         if self.check_win():
             self.game_over = True
+
+        return True
 
     def check_win(self):
         if self.check_rows():

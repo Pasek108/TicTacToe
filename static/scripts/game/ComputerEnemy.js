@@ -74,8 +74,31 @@ class ComputerEnemy {
 
   /* -------------------- movable algorithms -------------------- */
   movable(maximalize, game) {
-    if (game.availableMoves().length <= 11) return this.alphabeta(maximalize, game)[1];
-    return maximalize ? this.makeLine(game) : this.avoidLine(game);
+    if (game.moves_counter < 6) return this.alphabeta(maximalize, game)[1];
+    return this.alphabeta2(maximalize, game, 0)[1];
+  }
+
+  alphabeta2(maximalize, game, depth, parent_value) {
+    if (game.checkIfGameOver() || depth > 5) return game.result();
+
+    let min = [10], max = [-10];
+    const moves = game.availableMoves();
+
+    for (let i = 0; i < moves.length; i++) {
+      game.makeMove(moves[i][0], moves[i][1]);
+      const result = this.alphabeta(!maximalize, game, maximalize ? max : min);
+      result[1] = game.back();
+
+      if (result[0] < min[0]) min = result;
+      if (result[0] > max[0]) max = result;
+
+      if (parent_value?.[1] != null) {
+        if (maximalize && result[0] > parent_value[0]) break;
+        if (!maximalize && result[0] < parent_value[0]) break;
+      }
+    }
+
+    return maximalize ? max : min;
   }
 
   /* -------------------- One mark algorithms -------------------- */

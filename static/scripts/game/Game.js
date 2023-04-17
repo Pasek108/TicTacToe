@@ -5,11 +5,12 @@ class Game {
     this.container = document.querySelector(".game");
 
     this.quit_button = this.container.querySelector(".quit");
-    this.quit_button.addEventListener("click", () => {
-      this.hide();
-      menu.show();
-    });
+    this.quit_button.replaceWith(this.quit_button.cloneNode(true));
+    this.quit_button = this.container.querySelector(".quit");
+    this.quit_button.addEventListener("click", this.quit.bind(this));
 
+    this.replay_button = this.container.querySelector(".replay");
+    this.replay_button.replaceWith(this.replay_button.cloneNode(true));
     this.replay_button = this.container.querySelector(".replay");
     this.replay_button.addEventListener("click", this.restart.bind(this));
 
@@ -87,6 +88,11 @@ class Game {
     }
   }
 
+  quit() {
+    this.hide();
+    menu.show();
+  }
+
   initGameState() {
     this.game_state = [];
 
@@ -110,15 +116,17 @@ class Game {
   }
 
   playerMove(x, y) {
-    if (this.is_computer_an_enemy && this.player_start_id != this.current_player_id) return;
-    if (this.is_game_over || this.game_state[x][y] != "") return;
+    if (this.is_computer_an_enemy && this.player_start_id != this.current_player_id) return false;
+    if (this.is_game_over || this.game_state[x][y] != "") return false;
 
     this.board.placeMark(x, y, this.options[this.current_player_id]);
     this.makeMove(x, y);
-    if (this.checkIfGameOver(false)) return;
+    if (this.checkIfGameOver(false)) return false;
 
     this.showMessage("current_turn");
     if (this.is_computer_an_enemy) this.computerMove();
+
+    return true;
   }
 
   computerMove() {

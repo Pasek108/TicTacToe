@@ -59,144 +59,124 @@
 
       <div class="rooms">
         <table>
-          <!--
-          <tr>
-            <td class="id">100</td>
-            <td class="mode">Normalny XO 3x3 Standardowy</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
+          <template id="room-template">
+            <tr>
+              <td class="id">1</td>
+              <td class="mode">
+                <div class="normal mode-name">
+                  <span class="pl">Normalny XO 3x3</span>
+                  <span class="en">Normal XO 3x3</span>
+                </div>
 
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Przesuwany XO 3x3 Standardowy</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
+                <div class="movable mode-name hidden">
+                  <span class="pl">Przesuwany XO 3x3</span>
+                  <span class="en">Movable XO 3x3</span>
+                </div>
 
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Jeden znak X 4x4 Odwrócony</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
+                <div class="one-mark mode-name hidden">
+                  <span class="pl">Jeden znak X 4x4</span>
+                  <span class="en">One mark X 4x4</span>
+                </div>
 
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Normalny XO 3x3</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
+                <div class="type">
+                  <div class="standard type-name">
+                    <span class="pl">Standardowy</span>
+                    <span class="en">Standard</span>
+                  </div>
 
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Normalny XO 3x3</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Normalny XO 3x3</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Normalny XO 3x3</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Normalny XO 3x3</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="id">1</td>
-            <td class="mode">Normalny XO 3x3</td>
-            <td class="players">1/2</td>
-            <td class="button">
-              <button class="rect-btn">
-                <i class="fa-solid fa-right-to-bracket"></i>
-              </button>
-            </td>
-          </tr>
-          -->
+                  <div class="reverse type-name hidden">
+                    <span class="pl">Odwrócony</span>
+                    <span class="en">Reverse</span>
+                  </div>
+                </div>
+              </td>
+              <td class="players">1/2</td>
+              <td class="button">
+                <button class="rect-btn join">
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                </button>
+              </td>
+            </tr>
+          </template>
         </table>
       </div>
 
       <button class="rect-btn create-room">
         <i class="fa-solid fa-plus"></i>
-        Utwórz pokój
+        <span class="pl">Utwórz grę</span>
+        <span class="en">Create game</span>
       </button>
 
       <div class="create-game-modal" style="display: none">
-        <h2>Utwórz nową gre</h2>
+        <h2>
+          <span class="pl">Utwórz nową grę</span>
+          <span class="en">Create new game</span>
+        </h2>
         <div class="close">X</div>
 
-        <select name="mode" id="">
-          <option value="normal">Normalny XO 3x3</option>
-          <option value="movable">Przesuwany XO 3x3</option>
-          <option value="one_mark">Jeden znak X 4x4</option>
-        </select>
+        <span class="pl">
+          <select class="mode-input">
+            <option value="0">Normalny XO 3x3</option>
+            <option value="1">Przesuwany XO 3x3</option>
+            <option value="2">Jeden znak X 4x4</option>
+          </select>
+        </span>
 
-        <div class="checkbox">
-          <label for="reverse">Odwrócony</label>
-          <input type="checkbox" id="reverse" name="reverse" />
+        <span class="en">
+          <select class="mode-input">
+            <option value="0">Normal XO 3x3</option>
+            <option value="1">Movable XO 3x3</option>
+            <option value="2">One mark X 4x4</option>
+          </select>
+        </span>
+
+        <div class="row">
+          <div class="checkbox">
+            <label for="reverse">
+              <span class="pl">Odwrócony</span>
+              <span class="en">Reverse</span>
+            </label>
+            <input type="checkbox" id="reverse" />
+          </div>
+
+          <div class="checkbox">
+            <label for="password">
+              <span class="pl">Hasło:</span>
+              <span class="en">Password:</span>
+            </label>
+            <input type="text" id="password" />
+          </div>
         </div>
 
         <div class="checkbox">
-          <label>Zacznij jako:</label>
+          <label>
+            <span class="pl">Zacznij jako:</span>
+            <span class="en">Start as:</span>
+          </label>
 
           <div class="radio">
-            <input type="radio" name="start" id="p1" checked />
+            <input type="radio" name="start" id="p1" value="0" checked />
             <label for="p1">P1</label>
           </div>
 
           <div class="radio">
-            <input type="radio" name="start" id="p2" />
+            <input type="radio" name="start" id="p2" value="1" />
             <label for="p2">P2</label>
           </div>
         </div>
 
-        <button class="rect-btn">Utwórz</button>
+        <div class="checkbox">
+          <label for="change">
+            <span class="pl">Zmieniaj się co grę</span>
+            <span class="en">Change side every game:</span>
+          </label>
+          <input type="checkbox" id="change" />
+        </div>
+
+        <button class="rect-btn create">
+          <span class="pl">Utwórz</span>
+          <span class="en">Create</span>
+        </button>
       </div>
     </div>
 
@@ -231,11 +211,40 @@
 
       <div class="board"></div>
 
+      <div class="mode">
+        <div class="normal mode-name">
+          <span class="pl">Normalny XO 3x3</span>
+          <span class="en">Normal XO 3x3</span>
+        </div>
+
+        <div class="movable mode-name hidden">
+          <span class="pl">Przesuwany XO 3x3</span>
+          <span class="en">Movable XO 3x3</span>
+        </div>
+
+        <div class="one-mark mode-name hidden">
+          <span class="pl">Jeden znak X 4x4</span>
+          <span class="en">One mark X 4x4</span>
+        </div>
+
+        <div class="type">
+          <div class="standard type-name">
+            <span class="pl">Standardowy</span>
+            <span class="en">Standard</span>
+          </div>
+
+          <div class="reverse type-name hidden">
+            <span class="pl">Odwrócony</span>
+            <span class="en">Reverse</span>
+          </div>
+        </div>
+      </div>
+
       <div class="buttons">
-        <a href="/" class="rect-btn quit">
+        <button class="rect-btn quit">
           <span class="pl">Wyjdź</span>
           <span class="en">Quit</span>
-        </a>
+        </button>
 
         <button class="rect-btn replay" disabled>
           <span class="pl">Zagraj ponownie</span>
@@ -256,8 +265,11 @@
     <script src="static/scripts/game/NormalMode.js"></script>
     <script src="static/scripts/game/MovableMode.js"></script>
     <script src="static/scripts/game/OneMarkMode.js"></script>
+    <script src="static/scripts/multiplayer/Rooms.js"></script>
+    <script src="static/scripts/multiplayer/CreateGameModal.js"></script>
+    <script src="static/scripts/multiplayer/MultiplayerGame.js"></script>
+    <script src="static/scripts/multiplayer/Lobby.js"></script>
     <script src="static/scripts/Language.js"></script>
-    <script src="static/scripts/Lobby.js"></script>
     <script src="static/scripts/global.js"></script>
   </body>
 </html>
