@@ -62,6 +62,7 @@ class CreateGameModal {
     this.socket.emit("create_game", JSON.stringify(game_data), (game_info) => {
       lobby.hide();
       this.game = new MultiplayerGame(
+        game_info.mode_id, 
         game_info.id, 
         game_info.player_id, 
         game_info.type_id === 0, 

@@ -1,7 +1,7 @@
 "use strict";
 
 class Game {
-  constructor(mode_id, versus_id, player_start_id, maximalize, options, size, enemy_algorithm) {
+  constructor(mode_id, versus_id, player_start_id, maximalize, options, size, change, enemy_algorithm) {
     this.container = document.querySelector(".game");
 
     this.quit_button = this.container.querySelector(".quit");
@@ -25,6 +25,7 @@ class Game {
     this.maximalize = maximalize;
     this.options = options;
     this.size = size;
+    this.change = change;
 
     this.computer_enemy = new ComputerEnemy(enemy_algorithm, maximalize);
     this.board = new Board(size, this.playerMove.bind(this));
@@ -63,6 +64,14 @@ class Game {
     this.mode_names = this.container.querySelectorAll(".mode-name");
     this.mode_names.forEach((mode) => mode.classList.add("hidden"));
     this.mode_names[this.mode_id].classList.remove("hidden");
+
+    //load marks
+    this.marks = this.container.querySelector(".marks");
+    this.marks.innerText = `${this.options[0]}${this.options[1]}`;
+
+    //load size
+    this.marks = this.container.querySelector(".size");
+    this.marks.innerText = `${this.size}x${this.size}`;
 
     // load mode type
     this.type_names = this.container.querySelectorAll(".type-name");

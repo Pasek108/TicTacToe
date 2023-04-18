@@ -1,8 +1,8 @@
 "use strict";
 
 class MovableMode extends Game {
-  constructor(versus_id, player_start_id, maximalize) {
-    super(1, versus_id, player_start_id, maximalize, ["X", "O"], 3, "movable");
+  constructor(versus_id, player_start_id, maximalize, size, marks, change) {
+    super(1, versus_id, player_start_id, maximalize, marks, size, change, "movable");
 
     this.moves_counter = 0;
     this.pick_turn = false;

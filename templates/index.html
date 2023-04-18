@@ -20,6 +20,11 @@
   </head>
 
   <body>
+    <div class="info-button">
+      <i class="fa-solid fa-info"></i>
+    </div>
+    <div class="info"></div>
+
     <!-- -------------- header -------------- -->
     <header>
       <h1><a href="/">TicTacToe</a></h1>
@@ -43,7 +48,7 @@
 
     <!-- -------------- menu -------------- -->
     <div class="menu">
-      <div class="step1">
+      <div class="step step1">
         <h2>
           <div class="play-vs-computer message">
             <span class="pl">Zagraj z komputerem</span>
@@ -64,23 +69,23 @@
 
         <div class="gamemode">
           <button class="rect-btn option" data-id="0">
-            <span class="pl">Normalny XO 3x3</span>
-            <span class="en">Normal XO 3x3</span>
+            <span class="pl">Normalny</span>
+            <span class="en">Normal</span>
           </button>
 
           <button class="rect-btn option" data-id="1">
-            <span class="pl">Przesuwany XO 3x3</span>
-            <span class="en">Movable XO 3x3</span>
+            <span class="pl">Przesuwany</span>
+            <span class="en">Movable</span>
           </button>
 
           <button class="rect-btn option" data-id="2">
-            <span class="pl">Jeden znak X 4x4</span>
-            <span class="en">One mark X 4x4</span>
+            <span class="pl">Jeden znak</span>
+            <span class="en">One mark</span>
           </button>
         </div>
       </div>
 
-      <div class="step2" style="display: none">
+      <div class="step step2" style="display: none">
         <h2>
           <span class="pl">Zacznij jako</span>
           <span class="en">Start as</span>
@@ -111,6 +116,71 @@
             <span class="en">Reverse</span>
           </button>
         </div>
+
+        <button class="rect-btn back">
+          <i class="fa-solid fa-angles-left"></i>
+          <span class="pl">Wróć</span>
+          <span class="en">Back</span>
+        </button>
+      </div>
+
+      <div class="step step3" style="display: none">
+        <div class="size">
+          <h2>
+            <span class="pl">Rozmiar planszy:</span>
+            <span class="en">Board size:</span>
+          </h2>
+
+          <div class="select">
+            <select id="size">
+              <option value="2">2x2</option>
+              <option value="3" selected>3x3</option>
+              <option value="4">4x4</option>
+              <option value="5">5x5</option>
+              <option value="6">6x6</option>
+              <option value="7">7x7</option>
+              <option value="8">8x8</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="marks">
+          <h2>
+            <span class="pl">Oznaczenia graczy:</span>
+            <span class="en">Players marks:</span>
+          </h2>
+
+          <div class="players-marks">
+            <div class="mark">
+              <label for="p1-mark">P1</label>
+              <input type="text" id="p1-mark" value="X" />
+            </div>
+
+            <div class="mark">
+              <label for="p2-mark">P2</label>
+              <input type="text" id="p2-mark" value="O" />
+            </div>
+          </div>
+        </div>
+
+        <div class="change">
+          <label for="change">
+            <span class="pl">Zmieniaj stronę co grę</span>
+            <span class="en">Change side every game</span>
+          </label>
+          <input type="checkbox" id="change" />
+        </div>
+
+        <button class="rect-btn play">
+          <span class="pl">Graj</span>
+          <span class="en">Play</span>
+        </button>
+
+        <button class="rect-btn back">
+          <i class="fa-solid fa-angles-left"></i>
+          <span class="pl">Wróć</span>
+          <span class="en">Back</span>
+        </button>
       </div>
     </div>
 
@@ -147,26 +217,29 @@
 
       <div class="mode">
         <div class="normal mode-name">
-          <span class="pl">Normalny XO 3x3</span>
-          <span class="en">Normal XO 3x3</span>
+          <span class="pl">Normalny</span>
+          <span class="en">Normal</span>
         </div>
 
         <div class="movable mode-name hidden">
-          <span class="pl">Przesuwany XO 3x3</span>
-          <span class="en">Movable XO 3x3</span>
+          <span class="pl">Przesuwany</span>
+          <span class="en">Movable</span>
         </div>
 
         <div class="one-mark mode-name hidden">
-          <span class="pl">Jeden znak X 4x4</span>
-          <span class="en">One mark X 4x4</span>
+          <span class="pl">Jeden znak</span>
+          <span class="en">One mark</span>
         </div>
+
+        <div class="marks">XO</div>
+        <div class="size">3x3</div>
 
         <div class="type">
           <div class="standard type-name">
             <span class="pl">Standardowy</span>
             <span class="en">Standard</span>
           </div>
-  
+
           <div class="reverse type-name hidden">
             <span class="pl">Odwrócony</span>
             <span class="en">Reverse</span>

@@ -1,12 +1,15 @@
 @import "helper_mixins";
 
 * {
-  font-family: "Varela Round", sans-serif;
-  letter-spacing: 0.05em;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   border: none;
-  color: inherit;
+  outline: none;
+  font-family: "Varela Round", sans-serif;
   font-size: inherit;
+  letter-spacing: 0.05em;
+  color: inherit;
 }
 
 html {
@@ -66,7 +69,7 @@ a {
   @include flex(column, center, center);
   width: 7rem;
   height: 7rem;
-  background: #273c75;
+  background: #213d8b;
   cursor: pointer;
 
   i {
@@ -75,7 +78,7 @@ a {
 
   &.active {
     border: 2px solid white;
-    background: #192a56;
+    background: #16295b;
   }
 
   &:disabled {
@@ -88,14 +91,14 @@ a {
   min-width: 22rem;
   padding: 1rem 2rem;
   margin: 0.5rem 0;
-  background: #273c75;
+  background: #213d8b;
   font-size: 1.5rem;
   color: white;
   font-weight: bold;
   cursor: pointer;
 
   &:hover {
-    background: #192a56;
+    background: #16295b;
   }
 
   &:disabled {
@@ -103,3 +106,44 @@ a {
     pointer-events: none;
   }
 }
+
+.info-button {
+  @include position(fixed, $bottom: 1vw, $right: 1vw, $zindex: 15);
+  @include flex(column, center, center);
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 4px solid whitesmoke;
+  border-radius: 100%;
+  background: #343B45;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: whitesmoke;
+  cursor: pointer;
+
+  i {
+    margin-top: -0.2rem;
+    margin-right: -0.2rem;
+  }
+
+  &:hover {
+    background: whitesmoke;
+    color: #2f3640;
+  }
+}
+
+.info {
+  @include position(fixed, $bottom: 1vw, $right: 1vw, $zindex: 10);
+  background: #343B45;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 2rem;
+  transition: width 1s, height 1s, border-radius 1s, transform 1s;
+
+  &.active {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    transform: translate(1vw, 1vw);
+  }
+}
+

@@ -64,7 +64,7 @@ def on_create_game(data):
                 game_info["gamemode_id"],
                 int(game_info["reverse"]),
                 int(game_info['starting_player_id']),
-                3 + math.floor(game_info["gamemode_id"] / 2),
+                3 + math.floor(int(game_info["gamemode_id"]) / 2),
                 game_info["password"],
                 game_info["change"],
                 request.sid)

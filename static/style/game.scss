@@ -79,9 +79,11 @@
 }
 
 .game .mode {
-  @include flex(row, center, center);
-  gap: 0.25rem;
   margin-top: 1rem;
+
+  div {
+    display: inline-block;
+  }
 }
 
 .buttons {

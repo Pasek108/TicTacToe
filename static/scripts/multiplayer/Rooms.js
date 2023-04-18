@@ -53,6 +53,7 @@ class Rooms {
       lobby.hide();
 
       this.game = new MultiplayerGame(
+        room_info.mode_id, 
         room_id, 
         room_info.player_id, 
         room_info.type_id === 0, 

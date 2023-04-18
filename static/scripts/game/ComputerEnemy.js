@@ -212,10 +212,10 @@ class ComputerEnemy {
   /* ------ count all X for moves in it's row, column, diagonals ------ */
   fillWeights(weights, moves, game) {
     moves.forEach((move) => {
-      weights[move[0]][move[1]] += this.countInRow(game.game_state, move[1], "X");
-      weights[move[0]][move[1]] += this.countInCol(game.game_state, move[0], "X");
-      if (move[0] === move[1]) weights[move[0]][move[1]] += this.countInDiag1(game.game_state, "X");
-      if (move[0] === game.size - 1 - move[1]) weights[move[0]][move[1]] += this.countInDiag2(game.game_state, "X");
+      weights[move[0]][move[1]] += this.countInRow(game.game_state, move[1], game.options[0]);
+      weights[move[0]][move[1]] += this.countInCol(game.game_state, move[0], game.options[0]);
+      if (move[0] === move[1]) weights[move[0]][move[1]] += this.countInDiag1(game.game_state, game.options[0]);
+      if (move[0] === game.size - 1 - move[1]) weights[move[0]][move[1]] += this.countInDiag2(game.game_state, game.options[0]);
     });
   }
 

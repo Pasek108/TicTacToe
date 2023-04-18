@@ -19,12 +19,11 @@
   .versus {
     @include flex(row, center, space-between);
     min-width: 22rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   .gamemode {
     @include flex(column, center, center);
-    margin-top: 1rem;
   }
 }
 
@@ -34,7 +33,7 @@
   .player {
     @include flex(row, center, center);
     min-width: 22rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
     .square-btn {
       width: 8rem;
@@ -51,7 +50,71 @@
 
   .type {
     @include flex(column, center, center);
-    margin-top: 1rem;
+  }
+}
+
+.step3 {
+  @include flex(column, center, flex-start);
+
+  .size {
+    width: 100%;
+    margin-bottom: 2rem;
+
+    .select {
+      position: relative;
+      width: 100%;
+
+      &::after {
+        content: "";
+        @include position(absolute, 1.5rem, 1rem);
+        width: 0.8em;
+        height: 0.5em;
+        background-color: white;
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+      }
+
+      select {
+        appearance: none;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 2rem;
+        background: #213d8b;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .marks {
+    width: 100%;
+    margin-bottom: 2rem;
+
+    .players-marks {
+      @include flex(row, center, center);
+      gap: 3rem;
+      width: 100%;
+      font-size: 2rem;
+
+      input {
+        width: 4rem;
+        padding: 0.25rem 0.75rem;
+        font-size: 2rem;
+        text-align: center;
+        background: #213d8b;
+      }
+    }
+  }
+
+  .change {
+    @include flex(row, center, center);
+    width: 100%;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+
+    input {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-left: 0.75rem;
+    }
   }
 }
 

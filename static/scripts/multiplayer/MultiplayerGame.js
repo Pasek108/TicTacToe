@@ -1,8 +1,8 @@
 "use strict";
 
 class MultiplayerGame extends Game {
-  constructor(room_id, player_start_id, maximalize, game_state, switch_sides, socket) {
-    super(0, 1, player_start_id, maximalize, ["X", "O"], 3, "alphabeta");
+  constructor(mode_id, room_id, player_start_id, maximalize, game_state, switch_sides, socket) {
+    super(mode_id, 1, player_start_id, maximalize, ["X", "O"], 3, "alphabeta");
 
     this.room_id = room_id;
     this.sitch_sides = switch_sides;
