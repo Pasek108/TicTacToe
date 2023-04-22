@@ -78,6 +78,21 @@
   }
 }
 
+.game .link {
+  @include flex(row, center, space-between);
+  margin-top: 1rem;
+
+  .room div {
+    display: inline-block;
+  }
+
+  .invite {
+    color: #00c3ff;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
 .game .mode {
   margin-top: 1rem;
 
@@ -85,6 +100,7 @@
     display: inline-block;
   }
 }
+
 
 .buttons {
   @include flex(row, center, center);

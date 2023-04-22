@@ -2,6 +2,10 @@
 
 const socket = io.connect("http://127.0.0.1:5000");
 
+window.addEventListener("beforeunload", () => {
+  socket.emit("disconnect");
+})
+
 class Lobby {
   constructor() {
     this.container = document.querySelector(".lobby");

@@ -8,11 +8,16 @@ class ComputerEnemy {
 
   calculateMove(game) {
     switch (this.ai_type) {
-      case "random": return this.random(game);
-      case "minimax": return this.minimax(this.maximalize, game)[1];
-      case "alphabeta": return this.alphabeta(this.maximalize, game)[1];
-      case "movable": return this.movable(this.maximalize, game);
-      case "one_mark_4x4": return this.oneMark4x4(this.maximalize, game);
+      case "random":
+        return this.random(game);
+      case "minimax":
+        return this.minimax(this.maximalize, game)[1];
+      case "alphabeta":
+        return this.alphabeta(this.maximalize, game)[1];
+      case "movable":
+        return this.movable(this.maximalize, game, 0)[1];
+      case "one_mark_4x4":
+        return this.oneMark4x4(this.maximalize, game);
     }
   }
 
@@ -72,21 +77,16 @@ class ComputerEnemy {
     return maximalize ? max : min;
   }
 
-  /* -------------------- movable algorithms -------------------- */
-  movable(maximalize, game) {
-    if (game.moves_counter < 6) return this.alphabeta(maximalize, game)[1];
-    return this.alphabeta2(maximalize, game, 0)[1];
-  }
-
-  alphabeta2(maximalize, game, depth, parent_value) {
-    if (game.checkIfGameOver() || depth > 5) return game.result();
+  /* -------------------- movable algorithm -------------------- */
+  movable(maximalize, game, depth, parent_value) {
+    if (game.checkIfGameOver() || depth >= 8) return game.result();
 
     let min = [10], max = [-10];
     const moves = game.availableMoves();
 
     for (let i = 0; i < moves.length; i++) {
       game.makeMove(moves[i][0], moves[i][1]);
-      const result = this.alphabeta(!maximalize, game, maximalize ? max : min);
+      const result = this.movable(!maximalize, game, depth + 1, maximalize ? max : min);
       result[1] = game.back();
 
       if (result[0] < min[0]) min = result;
@@ -145,7 +145,7 @@ class ComputerEnemy {
     this.markOccupiedPlaces(weights, moves, -20);
     this.fillWeights(weights, moves, game);
 
-    //set start result small but no occupied place 
+    //set start result small but no occupied place
     let result = [0, 0];
     let result_value = 20;
 

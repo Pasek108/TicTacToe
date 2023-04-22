@@ -151,9 +151,9 @@ class Menu {
     const change = this.change.checked;
 
     switch (this.gamemode_id) {
-      case 0: this.game = new NormalMode(this.versus_id, this.player_id, maximalize, size, marks, change); break;
-      case 1: this.game = new MovableMode(this.versus_id, this.player_id, maximalize, size, marks, change); break;
-      case 2: this.game = new OneMarkMode(this.versus_id, this.player_id, maximalize, size, marks, change); break;
+      case 0: this.game = new NormalMode(this.gamemode_id, this.versus_id, this.player_id, maximalize, marks, size, change); break;
+      case 1: this.game = new MovableMode(this.gamemode_id, this.versus_id, this.player_id, maximalize, marks, size, change); break;
+      case 2: this.game = new OneMarkMode(this.gamemode_id, this.versus_id, this.player_id, maximalize, marks, size, change); break;
     }
 
     this.hide();

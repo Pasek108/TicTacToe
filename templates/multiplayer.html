@@ -21,6 +21,11 @@
   </head>
 
   <body>
+    <div class="info-button">
+      <i class="fa-solid fa-info"></i>
+    </div>
+    <div class="info"></div>
+
     <!-- -------------- header -------------- -->
     <header>
       <h1><a href="/">TicTacToe</a></h1>
@@ -64,19 +69,22 @@
               <td class="id">1</td>
               <td class="mode">
                 <div class="normal mode-name">
-                  <span class="pl">Normalny XO 3x3</span>
-                  <span class="en">Normal XO 3x3</span>
+                  <span class="pl">Normalny</span>
+                  <span class="en">Normal</span>
                 </div>
 
                 <div class="movable mode-name hidden">
-                  <span class="pl">Przesuwany XO 3x3</span>
-                  <span class="en">Movable XO 3x3</span>
+                  <span class="pl">Przesuwany</span>
+                  <span class="en">Movable</span>
                 </div>
 
                 <div class="one-mark mode-name hidden">
-                  <span class="pl">Jeden znak X 4x4</span>
-                  <span class="en">One mark X 4x4</span>
+                  <span class="pl">Jeden znak</span>
+                  <span class="en">One mark</span>
                 </div>
+
+                <div class="marks">XO</div>
+                <div class="size">3x3</div>
 
                 <div class="type">
                   <div class="standard type-name">
@@ -94,6 +102,7 @@
               <td class="button">
                 <button class="rect-btn join">
                   <i class="fa-solid fa-right-to-bracket"></i>
+                  <i class="fa-solid fa-lock"></i>
                 </button>
               </td>
             </tr>
@@ -101,11 +110,40 @@
         </table>
       </div>
 
-      <button class="rect-btn create-room">
-        <i class="fa-solid fa-plus"></i>
-        <span class="pl">Utwórz grę</span>
-        <span class="en">Create game</span>
-      </button>
+      <div class="lobby-buttons">
+        <button class="rect-btn create-room">
+          <i class="fa-solid fa-plus"></i>
+          <span class="pl">Utwórz grę</span>
+          <span class="en">Create game</span>
+        </button>
+        <!--
+        <button class="rect-btn create-room">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span class="pl">Odśwież poczekalnię</span>
+          <span class="en">Refresh lobby</span>
+        </button>-->
+      </div>
+      
+      <div class="password-modal" style="display: none">
+        <h2>
+          <span class="pl">Podaj hasło</span>
+          <span class="en">Input password</span>
+        </h2>
+
+        <input type="text" id="access-password" />
+
+        <div class="row">
+          <button class="rect-btn confirm">
+            <span class="pl">Potwierdź</span>
+            <span class="en">Confirm</span>
+          </button>
+
+          <button class="rect-btn cancel">
+            <span class="pl">Anuluj</span>
+            <span class="en">Cancel</span>
+          </button>
+        </div>
+      </div>
 
       <div class="create-game-modal" style="display: none">
         <h2>
@@ -114,63 +152,105 @@
         </h2>
         <div class="close">X</div>
 
-        <span class="pl">
-          <select class="mode-input">
-            <option value="0">Normalny XO 3x3</option>
-            <option value="1">Przesuwany XO 3x3</option>
-            <option value="2">Jeden znak X 4x4</option>
-          </select>
-        </span>
+        <div class="row">
+          <div class="mode">
+            <span class="pl">
+              <select class="mode-input">
+                <option value="0">Normalny</option>
+                <option value="1">Przesuwany</option>
+                <option value="2">Jeden znak</option>
+              </select>
+            </span>
 
-        <span class="en">
-          <select class="mode-input">
-            <option value="0">Normal XO 3x3</option>
-            <option value="1">Movable XO 3x3</option>
-            <option value="2">One mark X 4x4</option>
-          </select>
-        </span>
+            <span class="en">
+              <select class="mode-input">
+                <option value="0">Normal</option>
+                <option value="1">Movable</option>
+                <option value="2">One mark</option>
+              </select>
+            </span>
+          </div>
+
+          <div class="size">
+            <select id="size">
+              <option value="2">2x2</option>
+              <option value="3" selected>3x3</option>
+              <option value="4">4x4</option>
+              <option value="5">5x5</option>
+              <option value="6">6x6</option>
+              <option value="7">7x7</option>
+              <option value="8">8x8</option>
+            </select>
+          </div>
+        </div>
 
         <div class="row">
-          <div class="checkbox">
+          <div class="reverse">
             <label for="reverse">
               <span class="pl">Odwrócony</span>
               <span class="en">Reverse</span>
             </label>
+
             <input type="checkbox" id="reverse" />
           </div>
 
-          <div class="checkbox">
+          <div class="password">
             <label for="password">
               <span class="pl">Hasło:</span>
               <span class="en">Password:</span>
             </label>
+
             <input type="text" id="password" />
           </div>
         </div>
 
-        <div class="checkbox">
+        <div class="row">
+          <label>
+            <span class="pl">Oznaczenia graczy:</span>
+            <span class="en">Players marks:</span>
+          </label>
+
+          <div class="players-marks">
+            <div class="mark">
+              <label for="p1-mark">P1</label>
+              <input type="text" id="p1-mark" value="X" />
+            </div>
+
+            <div class="mark">
+              <label for="p2-mark">P2</label>
+              <input type="text" id="p2-mark" value="O" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
           <label>
             <span class="pl">Zacznij jako:</span>
             <span class="en">Start as:</span>
           </label>
 
-          <div class="radio">
-            <input type="radio" name="start" id="p1" value="0" checked />
-            <label for="p1">P1</label>
-          </div>
+          <div class="starting-player">
+            <div class="radio">
+              <label for="p1">P1</label>
+              <input type="radio" name="start" id="p1" value="0" checked />
+            </div>
 
-          <div class="radio">
-            <input type="radio" name="start" id="p2" value="1" />
-            <label for="p2">P2</label>
+            <div class="radio">
+              <label for="p2">P2</label>
+              <input type="radio" name="start" id="p2" value="1" />
+            </div>
           </div>
         </div>
 
-        <div class="checkbox">
-          <label for="change">
-            <span class="pl">Zmieniaj się co grę</span>
-            <span class="en">Change side every game:</span>
-          </label>
-          <input type="checkbox" id="change" />
+        <div class="row">
+          <div class="switch-side">
+            <label for="change">
+              <span class="pl">Zmieniaj się co grę</span>
+              <span class="en">Change side every game:</span>
+            </label>
+
+            <input type="checkbox" id="change" />
+          </div>
         </div>
 
         <button class="rect-btn create">
@@ -197,6 +277,11 @@
           <span class="pl">Remis</span>
           <span class="en">Draw</span>
         </div>
+
+        <div class="no-player message hidden">
+          <span class="pl">Brak gracza <span class="player-left">1</span></span>
+          <span class="en">Waiting for Player <span class="player-left">1</span></span>
+        </div>
       </h2>
 
       <div class="players">
@@ -206,26 +291,29 @@
           <span class="en">You play as</span>
           <span class="player-start">P1</span>
         </div>
-        <div class="p1"><i class="fa-solid fa-user"></i> P2 - <span class="p2-mark">O</span></div>
+        <div class="p2"><i class="fa-solid fa-user"></i> P2 - <span class="p2-mark">O</span></div>
       </div>
 
       <div class="board"></div>
 
       <div class="mode">
         <div class="normal mode-name">
-          <span class="pl">Normalny XO 3x3</span>
-          <span class="en">Normal XO 3x3</span>
+          <span class="pl">Normalny</span>
+          <span class="en">Normal</span>
         </div>
 
         <div class="movable mode-name hidden">
-          <span class="pl">Przesuwany XO 3x3</span>
-          <span class="en">Movable XO 3x3</span>
+          <span class="pl">Przesuwany</span>
+          <span class="en">Movable</span>
         </div>
 
         <div class="one-mark mode-name hidden">
-          <span class="pl">Jeden znak X 4x4</span>
-          <span class="en">One mark X 4x4</span>
+          <span class="pl">Jeden znak</span>
+          <span class="en">One mark</span>
         </div>
+
+        <div class="marks">XO</div>
+        <div class="size">3x3</div>
 
         <div class="type">
           <div class="standard type-name">
@@ -237,6 +325,35 @@
             <span class="pl">Odwrócony</span>
             <span class="en">Reverse</span>
           </div>
+        </div>
+      </div>
+
+      <div class="moves-left">
+        <span class="pl">Pozostało <span class="moves">16</span> ruchów</span>
+        <span class="en"><span class="moves">16</span> moves left</span>
+      </div>
+
+      <div class="link">
+        <div class="room">
+          <div class="room-id">
+            <span class="pl">Id pokoju:</span>
+            <span class="en">Room id:</span>
+          </div>
+  
+          <div class="id">0</div>
+        </div>
+
+        <div class="copy-link">
+          <div class="invite">
+            <span class="pl">Zaproś gracza</span>
+            <span class="en">Invite player</span>
+          </div>
+
+          <div class="copied" style="display: none;">
+            <span class="pl">Skopiowano link</span>
+            <span class="en">Link copied</span>
+          </div>
+          
         </div>
       </div>
 

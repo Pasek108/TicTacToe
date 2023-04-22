@@ -9,6 +9,10 @@
     margin-bottom: 0;
   }
 
+  .lobby-buttons {
+    @include flex(row, center, space-between);
+  }
+
   button {
     @include flex(row, center, center);
     min-width: 10rem;
@@ -21,6 +25,19 @@
     i {
       font-size: 1.25rem;
       margin-right: 0.5rem;
+    }
+  }
+
+  .join i:last-of-type {
+    display: none;
+  }
+
+  .join.protected {
+    i:first-of-type {
+      display: none;
+    }
+    i:last-of-type {
+      display: block;
     }
   }
 
@@ -97,7 +114,7 @@
     width: 4rem;
   }
 
-  .mode {
+  table .mode {
     width: 19rem;
 
     div {
@@ -111,7 +128,7 @@
   }
 }
 
-.create-game-modal {
+.password-modal {
   @include position(fixed, 30%, calc(50% - 12.5rem));
   @include flex(column, flex-start, center);
   width: 25rem;
@@ -124,6 +141,29 @@
     margin-bottom: 1rem;
   }
 
+  input {
+    padding: 0.6rem 1rem 0.5rem 1rem;
+    width: 100%;
+    color: black;
+    margin-bottom: 1rem;
+  }
+
+  .row {
+    @include flex(row, center, space-between);
+    gap: 1rem;
+    width: 100%;
+  }
+}
+
+.create-game-modal {
+  @include position(fixed, 30%, calc(50% - 12.5rem));
+  @include flex(column, flex-start, center);
+  width: 25rem;
+  padding: 1rem 2rem;
+  border: 1px solid white;
+  border-radius: 1rem;
+  background: #1e2228;
+
   .close {
     @include position(absolute, 1.1rem, 2rem);
     font-size: 2rem;
@@ -135,6 +175,10 @@
     }
   }
 
+  h2 {
+    margin-bottom: 1rem;
+  }
+
   span {
     width: 100%;
   }
@@ -142,33 +186,65 @@
   select {
     width: 100%;
     padding: 0.5rem;
-    margin-bottom: 1rem;
     color: black;
   }
 
-  .checkbox {
-    @include flex(row, center, space-between);
-    margin-bottom: 1rem;
+  input[type="text"] {
+    padding: 0.3rem 0.5rem 0.2rem 0.5rem;
+    margin-left: 0.25rem;
+    width: 6rem;
+    text-align: center;
+    color: black;
   }
 
   .row {
     @include flex(row, center, space-between);
+    gap: 1rem;
     width: 100%;
+    margin-bottom: 1rem;
   }
 
-  input[type="text"] {
-    padding: 0.25rem 0.5rem;
-    margin-left: 0.25rem;
-    width: 6rem;
-    color: black;
+  .mode,
+  .size {
+    flex-grow: 1;
   }
 
-  .radio {
-    @include flex(row, center, space-between);
+  .reverse {
+    @include flex(row, center, flex-start);
+    gap: 0.25rem;
+  }
+
+  .marks {
+    label {
+      @include flex(row, center, flex-start);
+    }
+  }
+
+  .password {
+    @include flex(row, center, flex-end);
+    gap: 0.5rem;
+  }
+
+  .players-marks,
+  .starting-player {
+    @include flex(row, center, flex-end);
+    gap: 0.5rem;
+
+    .mark,
+    .radio {
+      @include flex(row, center, flex-end);
+    }
 
     input {
-      margin: 0 0.25rem 0 0.5rem;
+      width: 2rem;
+      padding: 0.3rem 0.5rem 0.2rem 0.5rem;
+      margin-left: 0.25rem;
     }
+  }
+
+  .switch-side {
+    @include flex(row, center, flex-start);
+    gap: 0.25rem;
   }
 
   button {

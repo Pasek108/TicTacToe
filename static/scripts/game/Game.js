@@ -1,7 +1,7 @@
 "use strict";
 
 class Game {
-  constructor(mode_id, versus_id, player_start_id, maximalize, options, size, change, enemy_algorithm) {
+  constructor(mode_id, versus_id, player_start_id, maximalize, options, size, switch_sides, enemy_algorithm) {
     this.container = document.querySelector(".game");
 
     this.quit_button = this.container.querySelector(".quit");
@@ -19,13 +19,16 @@ class Game {
     this.player_turn = this.container.querySelectorAll(".player-turn");
     this.player_win = this.container.querySelectorAll(".player-win");
 
+    this.moves_left_container = this.container.querySelector(".moves-left");
+    this.moves_left_container.style.display = (mode_id === 1) ? null : "none";
+
     this.mode_id = mode_id;
     this.is_computer_an_enemy = versus_id === 0;
     this.player_start_id = player_start_id;
     this.maximalize = maximalize;
     this.options = options;
     this.size = size;
-    this.change = change;
+    this.switch_sides = switch_sides;
 
     this.computer_enemy = new ComputerEnemy(enemy_algorithm, maximalize);
     this.board = new Board(size, this.playerMove.bind(this));
@@ -97,11 +100,6 @@ class Game {
     }
   }
 
-  quit() {
-    this.hide();
-    menu.show();
-  }
-
   initGameState() {
     this.game_state = [];
 
@@ -109,6 +107,11 @@ class Game {
       this.game_state.push([]);
       for (let j = 0; j < this.size; j++) this.game_state[i].push("");
     }
+  }
+
+  quit() {
+    this.hide();
+    menu.show();
   }
 
   restart() {
@@ -119,6 +122,12 @@ class Game {
     this.moves_history = [];
     this.is_game_over = false;
     this.current_player_id = 0;
+
+    if (this.switch_sides) {
+      this.player_start_id = +!this.player_start_id;
+      this.player_start = this.container.querySelector(".player-start");
+      this.player_start.innerText = `P${this.player_start_id + 1}`;
+    }
 
     this.showMessage("current_turn");
     if (this.is_computer_an_enemy && this.player_start_id === 1) this.computerMove();
@@ -315,5 +324,16 @@ class Game {
 
   isWonByStartingPlayer(x, y) {
     return this.game_state[x][y] == this.options[this.player_start_id];
+  }
+
+  consoleGameState() {
+    let state = "";
+
+    for (let i = 0; i < this.size; i++) {
+      for (let j = 0; j < this.size; j++) state += `[${this.game_state[i][j]}]`;
+      state += "\n";
+    }
+
+    console.log(state);
   }
 }

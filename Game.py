@@ -1,32 +1,62 @@
 class Game:
-    def __init__(self, id, mode_id, type_id, starting_id, size, password, switch_sides, player_sid):
-        self.id = id
+    def __init__(self, room_id, mode_id, type_id, starting_id, size, options, password, switch_sides, player_sid):
+        self.room_id = room_id
         self.mode_id = mode_id
         self.type_id = type_id
-        self.starting_id = starting_id
         self.size = size
         self.password = password
         self.switch_sides = switch_sides
 
         self.players = ["", ""]
-        self.players[self.starting_id] = player_sid
-        self.game_state = [[""]*size for j in range(size)]
-        self.options = ["X", "O"]
+        self.players[starting_id] = player_sid
+        self.game_state = [[""] * size for j in range(size)]
+        self.options = options
         self.current_player_id = 0
+        self.moves_counter = 0
         self.game_over = False
+
+    def get_room_info(self):
+        return {
+            "room_id": self.room_id,
+            "mode_id": self.mode_id,
+            "type_id": self.type_id,
+            "options": self.options,
+            "free_spaces": self.players.count(""),
+            "size": self.size,
+            "protected": self.password != ""
+        }
 
     def get_game_info(self, player_sid):
         return {
-            "id": self.id,
+            "room_id": self.room_id,
             "mode_id": self.mode_id,
             "type_id": self.type_id,
+            "options": self.options,
             "player_id": self.players.index(player_sid) if player_sid in self.players else -1,
-            "free_spaces": self.players.count(""),
             "size": self.size,
-            "password": self.password,
             "switch_sides": self.switch_sides,
-            "game_state": self.game_state
+            "game_state": self.game_state,
+            "password": self.password,
+            "active_players": [self.players[0] != "", self.players[1] != ""],
+            "moves_counter": self.moves_counter
         }
+
+    def get_active_players(self):
+        return [self.players[0] != "", self.players[1] != ""]
+
+    def restart(self, player_sid):
+        if player_sid not in self.players:
+            return False
+
+        if self.switch_sides:
+            self.players[0], self.players[1] = self.players[1], self.players[0]
+
+        self.game_state = [[""] * self.size for j in range(self.size)]
+        self.current_player_id = 0
+        self.moves_counter = 0
+        self.game_over = False
+
+        return True
 
     def player_leave(self, player_sid):
         self.players[self.players.index(player_sid)] = ""
@@ -36,19 +66,26 @@ class Game:
 
         return True
 
-    def player_join(self, player_sid):
-        if "" not in self.players:
+    def player_join(self, player_sid, password):
+        if "" not in self.players or password != self.password:
             return False
 
         self.players[self.players.index("")] = player_sid
         return True
 
-    def player_move(self, x, y, player_id):
+    def player_move(self, x, y, player_id, from_x, from_y):
         if self.game_over or self.game_state[x][y] != "" or self.current_player_id != player_id:
             return False
 
+        if self.mode_id == 1 and self.moves_counter > 6:
+            if abs(x - from_x) + abs(y - from_y) != 1:
+                return False
+
+            self.game_state[from_x][from_y] = ""
+
         self.game_state[x][y] = self.options[self.current_player_id]
         self.current_player_id = (self.current_player_id + 1) % 2
+        self.moves_counter += 1
 
         if self.check_win():
             self.game_over = True
@@ -125,4 +162,3 @@ class Game:
                     return False
 
         return True
-
