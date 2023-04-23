@@ -1,6 +1,6 @@
 "use strict";
 
-const socket = io.connect("http://127.0.0.1:5000");
+const socket = io.connect();
 
 window.addEventListener("beforeunload", () => {
   socket.emit("disconnect");
