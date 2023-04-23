@@ -146,6 +146,7 @@ class MovableMode extends Game {
     this.pick_turn = this.is_computer_an_enemy;
     this.pick = [];
     super.restart();
+    this.moves_left.forEach((move) => (move.innerText = `${this.max_moves - this.moves_counter}`));
   }
 
   checkIfGameOver(only_result = true) {
