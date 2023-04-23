@@ -45,6 +45,7 @@ class Lobby {
       game_info.password,
       game_info.active_players,
       game_info.moves_counter,
+      game_info.current_player_id,
       socket
     );
   }

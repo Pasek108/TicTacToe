@@ -10,7 +10,19 @@ function multiplayerClassCreator(mode_id) {
   }
 
   return class extends subclass {
-    constructor(mode_id, player_start_id, maximalize, marks, size, switch_sides, room_id, game_state, password, active_players, moves_counter, socket) {
+    constructor(mode_id, 
+      player_start_id, 
+      maximalize, 
+      marks, 
+      size, 
+      switch_sides, 
+      room_id, 
+      game_state, 
+      password, 
+      active_players, 
+      moves_counter,
+      current_player_id, 
+      socket) {
       super(mode_id, 1, player_start_id, maximalize, marks, size, switch_sides, "alphabeta");
 
       this.p1 = this.container.querySelector(".p1");
@@ -32,6 +44,8 @@ function multiplayerClassCreator(mode_id) {
       this.switch_sides = switch_sides;
       this.password = password;
       this.moves_counter = moves_counter;
+      this.current_player_id = current_player_id;
+      if (this.mode_name === "movable") this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
 
       this.game_state = game_state;
       this.loadGameState();
@@ -164,6 +178,7 @@ function multiplayerClassCreator(mode_id) {
               from_y: this.pick[1],
             };
 
+            console.log(move_info)
             this.socket.emit("move", move_info);
           }
 
@@ -182,9 +197,7 @@ function multiplayerClassCreator(mode_id) {
       for (let i = 0; i < this.game_state.length; i++) {
         for (let j = 0; j < this.game_state.length; j++) {
           if (this.game_state[i][j] == "") continue;
-
           this.board.placeMark(i, j, this.game_state[i][j]);
-          this.current_player_id = +!this.current_player_id;
         }
       }
     }

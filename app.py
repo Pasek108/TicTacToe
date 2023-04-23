@@ -103,7 +103,7 @@ def on_move(data):
     from_x = data['from_x']
     from_y = data['from_y']
 
-    if int(room) < len(rooms) and not rooms[room].player_move(x, y, player_start_id, from_x, from_y):
+    if int(room) >= len(rooms) or not rooms[room].player_move(x, y, player_start_id, from_x, from_y):
         return
 
     socketio.emit("player_move", data, room=str(room))

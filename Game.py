@@ -38,7 +38,8 @@ class Game:
             "game_state": self.game_state,
             "password": self.password,
             "active_players": [self.players[0] != "", self.players[1] != ""],
-            "moves_counter": self.moves_counter
+            "moves_counter": self.moves_counter,
+            "current_player_id": self.current_player_id
         }
 
     def get_active_players(self):
