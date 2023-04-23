@@ -1,10 +1,12 @@
 "use strict";
 
 class Rooms {
-  constructor(socket) {
+  constructor(create_game_callback, socket) {
     this.container = document.querySelector(".rooms table");
     this.room_template = this.container.querySelector("#room-template");
+
     this.socket = socket;
+    this.create_game_callback = create_game_callback;
 
     this.password_modal = document.querySelector(".password-modal");
     this.password_modal_input = this.password_modal.querySelector("#access-password");
@@ -87,22 +89,7 @@ class Rooms {
     this.socket.emit("join_room", room_id, password, (game_info) => {
       if (!game_info) return;
       lobby.hide();
-      
-      const multiplayer_game = multiplayerClassCreator(game_info.mode_id);
-      this.game = new multiplayer_game(
-        game_info.mode_id,
-        game_info.player_id,
-        game_info.type_id === 0,
-        game_info.options,
-        game_info.size,
-        game_info.switch_sides,
-        game_info.room_id,
-        game_info.game_state,
-        game_info.password,
-        game_info.active_players,
-        game_info.moves_counter,
-        this.socket
-      );
+      this.create_game_callback(game_info);
     });
   }
 }

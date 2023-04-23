@@ -96,16 +96,23 @@ def on_join_room(room_id, password):
 
 @socketio.on("move")
 def on_move(data):
-    if not rooms[data['room']].player_move(data['x'], data['y'], data['player_start_id'], data['from_x'], data['from_y']):
+    room = data['room']
+    player_start_id = data['player_start_id']
+    x = data['x']
+    y = data['y']
+    from_x = data['from_x']
+    from_y = data['from_y']
+
+    if int(room) < len(rooms) and not rooms[room].player_move(x, y, player_start_id, from_x, from_y):
         return
 
-    socketio.emit("player_move", data, room=data['room'])
+    socketio.emit("player_move", data, room=str(room))
 
 
 @socketio.on("restart")
 def on_restart(room_id):
     if rooms[int(room_id)].restart(request.sid):
-        socketio.emit('restart', room=room_id)
+        socketio.emit('restart', room=str(room_id))
 
 
 if __name__ == '__main__':

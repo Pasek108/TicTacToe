@@ -77,7 +77,7 @@ class Game:
         if self.game_over or self.game_state[x][y] != "" or self.current_player_id != player_id:
             return False
 
-        if self.mode_id == 1 and self.moves_counter > 6:
+        if self.mode_id == 1 and self.moves_counter >= 6:
             if abs(x - from_x) + abs(y - from_y) != 1:
                 return False
 

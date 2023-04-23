@@ -1,9 +1,11 @@
 "use strict";
 
 class CreateGameModal {
-  constructor(socket) {
+  constructor(create_game_callback, socket) {
     this.container = document.querySelector(".create-game-modal");
+
     this.socket = socket;
+    this.create_game_callback = create_game_callback;
 
     this.mode_id = 0;
     this.mode_inputs = this.container.querySelectorAll(".mode-input");
@@ -115,22 +117,7 @@ class CreateGameModal {
 
     this.socket.emit("create_game", JSON.stringify(game_data), (game_info) => {
       lobby.hide();
-
-      const multiplayer_game = multiplayerClassCreator(game_info.mode_id);
-      this.game = new multiplayer_game(
-        game_info.mode_id,
-        game_info.player_id,
-        game_info.type_id === 0,
-        game_info.options,
-        game_info.size,
-        game_info.switch_sides,
-        game_info.room_id,
-        game_info.game_state,
-        game_info.password,
-        game_info.active_players,
-        game_info.moves_counter,
-        this.socket
-      );
+      this.create_game_callback(game_info);
     });
   }
 }

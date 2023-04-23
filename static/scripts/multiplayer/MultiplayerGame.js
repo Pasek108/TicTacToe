@@ -4,15 +4,9 @@ function multiplayerClassCreator(mode_id) {
   let subclass;
 
   switch (mode_id) {
-    case 0:
-      subclass = NormalMode;
-      break;
-    case 1:
-      subclass = MovableMode;
-      break;
-    case 2:
-      subclass = OneMarkMode;
-      break;
+    case 0: subclass = NormalMode; break;
+    case 1: subclass = MovableMode; break;
+    case 2: subclass = OneMarkMode; break;
   }
 
   return class extends subclass {
@@ -29,7 +23,7 @@ function multiplayerClassCreator(mode_id) {
 
       this.room_id_container = this.container.querySelector(".room .id");
       this.room_id_container.innerText = room_id;
-      
+
       this.copied_text = this.container.querySelector(".copied");
       this.invite_player = this.container.querySelector(".invite");
       this.invite_player.addEventListener("click", this.copyLink.bind(this));
@@ -43,6 +37,11 @@ function multiplayerClassCreator(mode_id) {
       this.loadGameState();
       this.checkIfGameOver(false);
       this.markUnactivePlayer(active_players);
+
+      if (this.moves_counter >= 6) {
+        const moves = this.availableMoves();
+        moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
+      }
 
       this.socket = socket;
       this.socket.on("restart", this.restart.bind(this));
@@ -71,15 +70,15 @@ function multiplayerClassCreator(mode_id) {
 
         if (this.mode_name !== "movable") this.makeMove(to[0], to[1]);
         else {
-          this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
           this.makeMove(from, to);
+          this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
 
           if (this.moves_counter >= 6) {
             const moves = this.availableMoves();
             moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
             this.pickMarkToMove(to[0], to[1]);
           }
-        } 
+        }
 
         if (this.checkIfGameOver(false)) return false;
         this.showMessage("current_turn");
@@ -135,7 +134,7 @@ function multiplayerClassCreator(mode_id) {
 
       if (this.mode_name != "movable" || (this.mode_name === "movable" && this.moves_counter < 6)) {
         if (this.game_state[x][y] != "") return false;
-    
+
         const move_info = {
           room: this.room_id,
           player_start_id: this.player_start_id,
@@ -144,7 +143,7 @@ function multiplayerClassCreator(mode_id) {
           from_x: null,
           from_y: null,
         };
-    
+
         this.socket.emit("move", move_info);
       }
 
@@ -197,8 +196,16 @@ function multiplayerClassCreator(mode_id) {
     }
 
     restart() {
+      console.log("dupa")
       this.moves_counter = 0;
       super.restart();
+    }
+
+    remove() {
+      this.is_game_over = true;
+      this.socket.removeAllListeners("restart");
+      this.socket.removeAllListeners("room_players_change");
+      this.socket.removeAllListeners("player_move");
     }
   };
 }
