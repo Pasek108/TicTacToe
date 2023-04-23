@@ -1,5 +1,5 @@
 flask
-flask-socketio
 simple-websocket
-gunicorn==20.1.0
-eventlet==0.30.2
+eventlet
+flask-socketio
+

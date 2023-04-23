@@ -116,4 +116,4 @@ def on_restart(room_id):
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=True)
