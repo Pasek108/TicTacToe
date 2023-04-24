@@ -10,19 +10,7 @@ function multiplayerClassCreator(mode_id) {
   }
 
   return class extends subclass {
-    constructor(mode_id, 
-      player_start_id, 
-      maximalize, 
-      marks, 
-      size, 
-      switch_sides, 
-      room_id, 
-      game_state, 
-      password, 
-      active_players, 
-      moves_counter,
-      current_player_id, 
-      socket) {
+    constructor(mode_id, player_start_id, maximalize, marks, size, switch_sides, room_id, game_state, password, active_players, moves_counter, current_player_id, socket) {
       super(mode_id, 1, player_start_id, maximalize, marks, size, switch_sides, "alphabeta");
 
       this.p1 = this.container.querySelector(".p1");
@@ -45,58 +33,24 @@ function multiplayerClassCreator(mode_id) {
       this.password = password;
       this.moves_counter = moves_counter;
       this.current_player_id = current_player_id;
-      if (this.mode_name === "movable") this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
 
       this.game_state = game_state;
       this.loadGameState();
       this.checkIfGameOver(false);
       this.markUnactivePlayer(active_players);
 
-      if (this.moves_counter >= 6) {
-        const moves = this.availableMoves();
-        moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
+      if (this.mode_name === "movable") {
+        this.showMovementsLeft();
+        if (this.moves_counter >= 6) {
+          const moves = this.availableMoves();
+          moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
+        }
       }
 
       this.socket = socket;
       this.socket.on("restart", this.restart.bind(this));
       this.socket.on("room_players_change", this.markUnactivePlayer.bind(this));
-      this.socket.on("player_move", (data) => {
-        const from = [data.from_x, data.from_y];
-        const to = [data.x, data.y];
-
-        if (this.mode_name === "movable" && this.moves_counter >= 6) {
-          this.board.placeMark(to[0], to[1], this.options[this.current_player_id]);
-          this.board.removeMark(from[0], from[1]);
-
-          this.makeMove(from, to);
-          this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
-
-          this.board.resetLightUps();
-          if (this.checkIfGameOver(false)) return;
-
-          const moves = this.availableMoves();
-          moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
-          this.pickMarkToMove(to[0], to[1]);
-          return;
-        }
-
-        this.board.placeMark(to[0], to[1], this.options[this.current_player_id]);
-
-        if (this.mode_name !== "movable") this.makeMove(to[0], to[1]);
-        else {
-          this.makeMove(from, to);
-          this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
-
-          if (this.moves_counter >= 6) {
-            const moves = this.availableMoves();
-            moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
-            this.pickMarkToMove(to[0], to[1]);
-          }
-        }
-
-        if (this.checkIfGameOver(false)) return false;
-        this.showMessage("current_turn");
-      });
+      this.socket.on("player_move", this.recivePlayerMove.bind(this));
     }
 
     copyLink() {
@@ -112,6 +66,8 @@ function multiplayerClassCreator(mode_id) {
     }
 
     markUnactivePlayer(active_players) {
+      this.active_players = active_players;
+
       if (active_players[0]) {
         this.p1.style.color = null;
         this.showMessage("current_turn");
@@ -140,6 +96,37 @@ function multiplayerClassCreator(mode_id) {
         this.messages[3].classList.remove("hidden");
         this.player_left.forEach((player) => (player.innerText = +!this.player_start_id + 1));
       }
+    }
+
+    recivePlayerMove(data) {
+      const from = [data.from_x, data.from_y];
+      const to = [data.x, data.y];
+
+      this.board.placeMark(to[0], to[1], this.options[this.current_player_id]);
+
+      if (this.mode_name !== "movable") this.makeMove(to[0], to[1]);
+      else {
+        this.makeMove(from, to);
+        this.showMovementsLeft();
+
+        if (this.moves_counter >= 6) {
+          if (from[0] != null) {
+            this.board.removeMark(from[0], from[1]);
+            this.board.resetLightUps();
+          }
+
+          const moves = this.availableMoves();
+          moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
+          this.pickMarkToMove(to[0], to[1]);
+        }
+      }
+
+      if (this.checkIfGameOver(false)) {
+        this.board.resetLightUps();
+        return;
+      }
+
+      this.showMessage("current_turn");
     }
 
     playerMove(x, y) {
@@ -178,7 +165,6 @@ function multiplayerClassCreator(mode_id) {
               from_y: this.pick[1],
             };
 
-            console.log(move_info)
             this.socket.emit("move", move_info);
           }
 
@@ -209,7 +195,7 @@ function multiplayerClassCreator(mode_id) {
     }
 
     restart() {
-      console.log("dupa")
+      if (this.switch_sides && this.active_players.includes(false)) this.markUnactivePlayer([this.active_players[1], this.active_players[0]]);
       this.moves_counter = 0;
       super.restart();
     }

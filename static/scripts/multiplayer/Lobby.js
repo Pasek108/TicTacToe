@@ -2,10 +2,6 @@
 
 const socket = io.connect();
 
-window.addEventListener("beforeunload", () => {
-  socket.emit("disconnect");
-});
-
 class Lobby {
   constructor() {
     this.container = document.querySelector(".lobby");
@@ -20,6 +16,13 @@ class Lobby {
 
     socket.emit("load_lobby", (rooms) => this.rooms.loadRoomsInfo(rooms));
     socket.on("refresh_lobby", (rooms) => this.rooms.loadRoomsInfo(rooms));
+
+    window.addEventListener("beforeunload", () => {
+      socket.removeAllListeners("refresh_lobby");
+      if (this.game != null) this.game.remove();
+      
+      socket.disconnect();
+    });
   }
 
   show() {
@@ -31,8 +34,9 @@ class Lobby {
   }
 
   createGame(game_info) {
-    this.multiplayer_game = multiplayerClassCreator(game_info.mode_id);
     if (this.game != null) this.game.remove();
+
+    this.multiplayer_game = multiplayerClassCreator(game_info.mode_id);
     this.game = new this.multiplayer_game(
       game_info.mode_id,
       game_info.player_id,
