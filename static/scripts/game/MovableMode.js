@@ -11,7 +11,7 @@ class MovableMode extends Game {
     this.pick = [];
 
     this.moves_left = this.moves_left_container.querySelectorAll(".moves");
-    this.moves_left.forEach((move) => (move.innerText = `${this.max_moves - this.moves_counter}`));
+    this.showMovementsLeft();
 
     if (this.is_computer_an_enemy && this.player_start_id === 1) this.computerMove();
   }
@@ -26,7 +26,7 @@ class MovableMode extends Game {
       this.board.placeMark(x, y, this.options[this.current_player_id]);
 
       this.makeMove([-1, -1], [x, y]);
-      this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
+      this.showMovementsLeft();
 
       if (this.checkIfGameOver(false)) return false;
 
@@ -47,9 +47,10 @@ class MovableMode extends Game {
         this.board.removeMark(this.pick[0], this.pick[1]);
 
         this.makeMove(this.pick, [x, y]);
-        this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
+        this.showMovementsLeft();
 
         this.board.resetLightUps();
+        this.showMessage("current_turn");
         if (this.checkIfGameOver(false)) return;
         if (this.is_computer_an_enemy) this.computerMove();
       }
@@ -72,17 +73,21 @@ class MovableMode extends Game {
       if (move[0][0] >= 0) this.board.removeMark(move[0][0], move[0][1]);
 
       this.makeMove(move[0], move[1]);
-      this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
+      this.showMovementsLeft();
       this.board.resetLightUps();
 
       if (this.checkIfGameOver(false)) return;
 
+      this.showMessage("current_turn");
+
       if (this.moves_counter < 6) return;
       const moves = this.availableMoves();
       moves.forEach((move) => this.board.lightUpTile(move[0][0], move[0][1], "#35bc43"));
-
-      this.showMessage("current_turn");
     }, 500);
+  }
+
+  showMovementsLeft() {
+    this.moves_left.forEach((moves) => (moves.innerText = `${this.max_moves - this.moves_counter}`));
   }
 
   availableMoves() {

@@ -4,4 +4,6 @@ simple-websocket
 gunicorn==20.1.0
 eventlet==0.30.2
 
-gunicorn --worker-class eventlet -w 2 app:app
+python 3.7
+gunicorn --worker-class eventlet -w 1 app:app
+
