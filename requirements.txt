@@ -3,3 +3,12 @@ simple-websocket
 eventlet
 flask-socketio
 
+# --------- requirements for deploy ---------
+# flask
+# flask-socketio
+# simple-websocket
+# gunicorn==20.1.0
+# eventlet==0.30.2
+
+# python 3.7
+# gunicorn --worker-class eventlet -w 1 app:app
