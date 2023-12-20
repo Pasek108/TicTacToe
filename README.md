@@ -1,12 +1,8 @@
 # TicTacToe Readme
 <details>
   <summary>❓Why the page is not loading❓</summary>
-  Due to usage of PHP and MySQL for saving the best scores I had to use hosting with support for this technology. 
+  Due to usage of Flask for multiplayer I had to use hosting with support for this technology. 
   I have no money so I used a free hosting which unfortunately puts websites to sleep. Juts wait a few minutes and it should work.
-</details>
-<details>
-  <summary>❓Why sounds starts playing after first click and not when I open the page❓</summary>
-  It's because auto playing sounds is blocked by browser until the user interact with the document.
 </details>
 <details>
   <summary>❓Why my commits often have no names❓</summary>
@@ -40,8 +36,21 @@
 <br>
 
 ## Informations
-Deer Killer is an arcade racing game with the goal to get as many points as possible in one attempt by killing deers and avoiding cars. <br>
-See [live demo](https://pas-artur.000webhostapp.com/deer-killer/).
+Three tic-tac-toe versions in two modes. Player can play vs AI, vs player locally or over the internet in real-time. <br>
+See [live demo](https://tic-tac-toe-alqu.onrender.com).
+
+> [!TIP]  
+> Room for improvements:
+> - In-game instruction about game modes
+> - Inviting by QR code
+> - Two new game modes:
+>   - nested - to place a mark, player has to win a game in choosen place
+>   - bigger - players have 3 sizes of marks and they can place bigger mark on any smaller mark
+> - Users accounts for:
+>   - stats
+>   - custom mark
+>   - achievements
+> - Pagination, filtering and searching for rooms in multiplayer lobby
 
 ![preview](/_for_readme/preview.png)
 
@@ -49,41 +58,52 @@ See [live demo](https://pas-artur.000webhostapp.com/deer-killer/).
 
 ### Technologies
 Languages:
-- HTML
-- CSS
-- JS
-- Python
+- HTML5
+- CSS3
+- JS ES2018
+- Python 3.11
+
+Libraries and frameworks:
+- [SCSS](https://sass-lang.com)
+- [FontAwesome](https://fontawesome.com) 6.2.1
+- [GoogleFonts](https://fonts.google.com)
+- [Socekt.IO](https://socket.io) 4.6.0
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+- [Flask SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
   
 Programs:
-- [XAMPP](https://www.apachefriends.org/pl/index.html)
 - [VSCode](https://code.visualstudio.com)
 - [PyCharm](https://www.jetbrains.com/pycharm/)
   
 ----------------------------------
 
 ### Features
-- Menu starting animation
-- Mute/unmute sound
-- Menu windows with transitions
-- Credits window
-- Four levels of difficulty
-- Personal and general top 10 leaderboards for each difficulty
-- Countdown on game start
-- Spawning enemies that can hit players
-- Spawning deers that can be hit by enemy or player giving him points
-- Three lives for player
-- Explosion animation of enemy when it is hit by a player
-- Short time protection when enemy hit the player
-- Energy points for using slow motion skill
-- Points counter
-- Player slip and laughing deers animations when player loses all their lives
-- Game over screen and game restart without reloading the page
+- Customizable game settings:
+  - starting player
+  - board size
+  - player marks
+  - auto switching sides
+- Two types of game:
+  - standard - plyers try to make a line, first player making a line will win
+  - reversed - plyers try to avoid making a line, first player making a line will lose
+- Three game modes
+  - normal - typical tic tac toe
+  - movable - players put N marks on NxN grid, then in each turn, they have to move one of their marks until one of them win or moves limit is reached
+  - one mark - tic tac toe with one mark
+- Three ways of playing:
+  - vs computer
+  - vs player on the same device
+  - vs player over the internet
+- Real-time multiplayer:
+  - public lobby
+  - password protected rooms
+  - handling disconnections
 
 ----------------------------------
 
 ### Setup
 Ways to run this program: 
-1. Use the [live demo](https://pas-artur.000webhostapp.com/deer-killer/)
+1. Use the [live demo](https://tic-tac-toe-alqu.onrender.com)
 2. Follow the same steps as for editing the program
 
 To edit this program:
