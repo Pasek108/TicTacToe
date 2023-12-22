@@ -39,14 +39,6 @@
 Three tic-tac-toe versions in two modes. Player can play vs AI, vs player locally or over the internet in real-time. <br>
 See [live demo](https://tic-tac-toe-alqu.onrender.com).
 
-> [!TIP]  
-> Room for improvements:
-> - In-game instruction about game modes
-> - Inviting by QR code
-> - More game modes
-> - Users accounts for stats, custom mark and achievements
-> - Pagination, filtering and searching for rooms in multiplayer lobby
-
 ![preview](/_for_readme/preview.png)
 
 ----------------------------------
@@ -74,25 +66,39 @@ Programs:
 
 ### Features
 - Customizable game settings:
-  - starting player
-  - board size
-  - player marks
-  - auto switching sides
+  - Starting player
+  - Board size
+  - Player marks
+  - Auto switching sides
 - Two types of game:
-  - standard - plyers try to make a line, first player making a line will win
-  - reversed - plyers try to avoid making a line, first player making a line will lose
+  - Standard - plyers try to make a line, first player making a line will win
+  - Reversed - plyers try to avoid making a line, first player making a line will lose
 - Three game modes
-  - normal - typical tic tac toe
-  - movable - players put N marks on NxN grid, then in each turn, they have to move one of their marks until one of them win or moves limit is reached
-  - one mark - tic tac toe with one mark
+  - Normal - typical tic tac toe
+  - Movable - players put N marks on NxN grid, then in each turn, they have to move one of their marks until one of them win or moves limit is reached
+  - One mark - tic tac toe with one mark
 - Three ways of playing:
-  - vs computer
-  - vs player on the same device
-  - vs player over the internet
+  - With computer
+  - With player on the same device
+  - With player over the internet
 - Real-time multiplayer:
-  - public lobby
-  - password protected rooms
-  - handling disconnections
+  - Public lobby
+  - Password protected rooms
+  - Handling disconnections
+- Multiple languages:
+  - Polish
+  - English
+
+<br>
+ 
+> [!NOTE]  
+> Room for improvements:
+> - In-game instruction about game modes
+> - Inviting by QR code
+> - More game modes
+> - Users accounts for stats, custom mark and achievements
+> - Pagination, filtering and searching for rooms in multiplayer lobby
+> - Add more languages
 
 ----------------------------------
 
@@ -107,6 +113,11 @@ To edit this program:
 - Run app.py file
 - Install [Prepros](https://prepros.io)
 - Add this project in Prepros
+- Create config.py file in project folder
+- Run this code in some online Python IDE
+  - *import secrets*
+  - *print(secrets.token_hex(16))*
+- Put generated string in config.py eg. *SECRET_KEY = generadted_string*
 - Start coding
 
 ----------------------------------
@@ -124,7 +135,16 @@ This section is a general description of the project required to understand how 
 ### User interface
 #### Main menu
 ![main menu](/_for_readme/main_menu.png)
+In the main menu user can:
+- Change the language
+- Go to multiplayer
+- Start a game with an AI or with a player on the same device
+- Check my github
 
+Creating a game is a 3-step form:
+1. Enemy (AI or player on the same device) and game mode
+2. Statring player and type of game (standard, reversed)
+3. Board size, players marks, changing sides every game
 
 ----------------------------------
 
