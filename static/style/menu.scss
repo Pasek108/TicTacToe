@@ -127,11 +127,17 @@ footer {
   font-weight: bold;
 
   a {
+    margin-left: 0.5rem;
     color: white;
+    text-decoration: underline;
 
     i {
       margin-left: 0.5rem;
       font-size: 1.5rem;
+    }
+
+    &:hover {
+      color: #b4beda;
     }
   }
 }

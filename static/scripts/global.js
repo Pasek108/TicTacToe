@@ -7,6 +7,7 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+/*
 const info = document.querySelector(".info")
 const info_button = document.querySelector(".info-button")
 info_button.addEventListener("click", () => {
@@ -18,4 +19,4 @@ info_button.addEventListener("click", () => {
 
   info_button.innerHTML = "X"
   info.classList.add("active")
-})
+})*/
