@@ -157,7 +157,7 @@ Creating a game is a 3-step form:
 ----------------------------------
 
 #### Multiplayer lobby
-![multiplayer_lobby](/_for_readme/multiplayer_lobby.png)
+![multiplayer_lobby](/_for_readme/multi_lobby.png)
 The lobby shows all existing games in the form of a list of rooms that the player can join or create a new one. When there is no players in the room, the room is deleted.  
 
 Each of the rooms in the lobby has:
@@ -186,8 +186,13 @@ Player has to choose:
 ----------------------------------
 
 #### Game
-![game](/_for_readme/game.png)
+![game](/_for_readme/onemark_game.png)
 
+
+----------------------------------
+
+#### Multiplayer game
+![multiplayer_game](/_for_readme/multi_game.png)
 
 ----------------------------------
 
