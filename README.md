@@ -158,7 +158,7 @@ Creating a game is a 3-step form:
 
 #### Multiplayer lobby
 ![multiplayer_lobby](/_for_readme/multi_lobby.png)
-The lobby shows all existing games in the form of a list of rooms that the player can join or create a new one. When there is no players in the room, the room is deleted.  
+The lobby shows all existing games in the form of a list of rooms that the player can join or create a new one. When there is no players in the room, the room is deleted. If the room is full player can't join until some place becomes available. In that case the join button is disabled. Rooms protected by password has a join button with a lock icon. After clicking it player has to put the correct password in order to join to the game.
 
 Each of the rooms in the lobby has:
 - Unique ID
@@ -170,10 +170,8 @@ Each of the rooms in the lobby has:
 - Number of players in the room
 - Join button
 
-If the room is full player can't join until some place becomes available. In that case the join button is disabled.<br>
-Rooms protected by password has a join button with a lock icon. After clicking it player has to put the correct password in order to join to the game.
+Creating a game is similar to creating a game in the main menu. The difference is that it is packed in one form and has option for setting password.
 
-Creating a game is similar to creating a game in the main menu. The difference is that it is packed in one form and has option for setting password<br>
 Player has to choose:
 - Game mode
 - Board size
