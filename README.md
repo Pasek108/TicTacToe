@@ -162,7 +162,7 @@ The lobby shows all existing games in the form of a list of rooms that the playe
 
 Each of the rooms in the lobby has:
 - Unique ID
-- Name (eg. Mode XO 3x3 Standard) consisting of:
+- Name consisting of:
   - Mode
   - Players marks
   - Board size
