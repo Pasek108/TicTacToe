@@ -71,8 +71,8 @@ Programs:
   - Player marks
   - Auto switching sides
 - Two types of game:
-  - Standard - plyers try to make a line, first player making a line will win
-  - Reversed - plyers try to avoid making a line, first player making a line will lose
+  - Standard - players try to make a line, first player making a line will win
+  - Reversed - players try to avoid making a line, first player making a line will lose
 - Three game modes
   - Normal - typical tic tac toe
   - Movable - players put N marks on NxN grid, then in each turn, they have to move one of their marks until one of them win or moves limit is reached
@@ -117,7 +117,7 @@ To edit this program:
 - Run this code in some online Python IDE
   - *import secrets*
   - *print(secrets.token_hex(16))*
-- Put generated string in config.py eg. *SECRET_KEY = generadted_string*
+- Put generated string in config.py eg. *SECRET_KEY = "generated_string"*
 - Start coding
 
 ----------------------------------
@@ -133,48 +133,60 @@ To edit this program:
 This section is a general description of the project required to understand how it works, the exact details are in the code or simply are the code.
 
 ### User interface
+#### Every page
+On every page there is: 
+- Header:
+  - Title which is a link to the main menu page
+  - Language selection box that allows the user to change the language of the page without reloading
+- Footer
+  - Link to my github
+
 #### Main menu
 ![main menu](/_for_readme/main_menu.png)
-In the main menu user can:
-- Change the language
-- Go to multiplayer
-- Start a game with an AI or with a player on the same device
-- Check my github
+Main menu is basically a form for creating a game.
 
+Click on the multiplayer option will take the player to the multiplayer lobby.<br>
+Click on the back option will take the player to the previous step.<br>
+
+![main menu](/_for_readme/main_menu_steps.png)
 Creating a game is a 3-step form:
 1. Enemy (AI or player on the same device) and game mode
-2. Statring player and type of game (standard, reversed)
+2. Starting player and type of game (standard, reversed)
 3. Board size, players marks, changing sides every game
 
 ----------------------------------
 
-#### Top score
-![top_score](/_for_readme/top_score.png)
+#### Multiplayer lobby
+![multiplayer_lobby](/_for_readme/multiplayer_lobby.png)
+The lobby shows all existing games in the form of a list of rooms that the player can join or create a new one. When there is no players in the room, the room is deleted.  
 
+Each of the rooms in the lobby has:
+- Unique ID
+- Name (eg. Mode XO 3x3 Standard) consisting of:
+  - Mode
+  - Players marks
+  - Board size
+  - Type of a game
+- Number of players in the room
+- Join button
 
-----------------------------------
+If the room is full player can't join until some place becomes available. In that case the join button is disabled.<br>
+Rooms protected by password has a join button with a lock icon. After clicking it player has to put the correct password in order to join to the game.
 
-#### Credits
-![credits](/_for_readme/credits.png)
-
-
-----------------------------------
-
-#### Difficulty
-![difficulty](/_for_readme/difficulty.png)
-
+Creating a game is similar to creating a game in the main menu. The difference is that it is packed in one form and has option for setting password<br>
+Player has to choose:
+- Game mode
+- Board size
+- Type (uncheck = standard, check = reversed)
+- Password (empty = no password)
+- Players marks
+- Starting player
+- Switching sides every game
 
 ----------------------------------
 
 #### Game
 ![game](/_for_readme/game.png)
-![game_hit](/_for_readme/game_hit.png)
-
-
-----------------------------------
-
-#### Game over
-![game over](/_for_readme/game_over.png)
 
 
 ----------------------------------
