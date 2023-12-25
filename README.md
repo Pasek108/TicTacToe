@@ -194,8 +194,8 @@ If both players leave the game then te romm and its game is deleted.
 ### Project structure
 The project directory tree looks like this:
 - :file_folder: TicTacToe (project folder)
-  - :page_facing_up: *git and prepros config*
-  - :page_facing_up: *readm filee*
+  - :page_facing_up: *github and prepros config*
+  - :page_facing_up: *readme file*
   - :page_facing_up: *requirements file*
   - :page_facing_up: *app.py and config.py - server in flask*
   - :page_facing_up: *Game.py - server side game object*
