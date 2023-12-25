@@ -53,6 +53,7 @@ Libraries and frameworks:
 Programs:
 - [VSCode](https://code.visualstudio.com)
 - [PyCharm](https://www.jetbrains.com/pycharm/)
+- [Prepros](https://prepros.io) (auto preview, processing scss)
   
 ----------------------------------
 
