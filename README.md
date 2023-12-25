@@ -191,31 +191,33 @@ Player has to choose:
 
 #### Multiplayer game
 ![multiplayer_game](/_for_readme/multi_game.png)
+Games in multiplayer are the same as normal games but on the bottom there is a room id and button to copy a link for someone to join a room. 
+Password is passed in the URL.
+
+If there is no other player or player left the game, its position will be hilighted in red color and game will be stopped on waiting for enemy player to making a move.
+If both players leave the game then te romm and its game is deleted.
 
 ----------------------------------
 
 ### Project structure
 The project directory tree looks like this:
-- :file_folder: DeerKiller (project folder)
-  - :page_facing_up: *git config*
-  - :page_facing_up: *readme*
-  - :page_facing_up: *index.html file*
+- :file_folder: TicTacToe (project folder)
+  - :page_facing_up: *git and prepros config*
+  - :page_facing_up: *readm filee*
+  - :page_facing_up: *requirements file*
+  - :page_facing_up: *app.py and config.py - server in flask*
+  - :page_facing_up: *Game.py - server side game object*
   - :file_folder: _for_readme - :page_facing_up: *files for readme*
-  - :file_folder: Sounds - :page_facing_up: *sounds and music used in project*
-  - :file_folder: Images
-    - :file_folder: UI - :page_facing_up: *images for user interface*
-    - :file_folder: Game - :page_facing_up: *images used in the game*
-  - :file_folder: PHP
-    - :page_facing_up: *mysql database file*
-    - :page_facing_up: *php files for saving and getting the score*
-  - :file_folder: Scripts
-    - :file_folder: Menu - :page_facing_up: *scripts for menu*
-    - :file_folder: Game
-      - :page_facing_up: *scripts for game*
-      - :file_folder: UI - :page_facing_up: *scripts for user interface in game*
-  - :file_folder: Styles
-    - :page_facing_up: *css files*
-    - :file_folder: fonts - :page_facing_up: *fonts used in the project*
+  - :file_folder: templates - :page_facing_up: *single and multiplayer html files*
+  - :file_folder: static
+    - :file_folder: images - :page_facing_up: *images used in the project*
+    - :file_folder: scripts
+      - :page_facing_up: *top level script files (eg. global, menu, language)*
+      - :file_folder: multiplayer - :page_facing_up: *scripts for mutiplayer*
+      - :file_folder: game - :page_facing_up: *scripts for game itself (eg. modes, board, AI)*
+    - :file_folder: style
+      - :page_facing_up: *scss files*
+      - :file_folder: css - :page_facing_up: *css files compiled by prepros*
 
 ----------------------------------
 
