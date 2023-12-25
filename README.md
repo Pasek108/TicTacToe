@@ -103,6 +103,7 @@ Ways to run this program:
 To edit this program:
 - Download this repo
 - Download and install Python
+- Install libraries from requirements.txt
 - Run app.py file
 - Install [Prepros](https://prepros.io)
 - Add this project in Prepros
