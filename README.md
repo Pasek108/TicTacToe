@@ -187,13 +187,16 @@ In game view has:
 - Game info (name, marks, board size, type)
 - Quit and Replay buttons (replay button is disabled until the game is over)
 
+**Normal game**
 ![normal game](/_for_readme/normal_game.png)
 Normal version of the tic tac toe, users puts their marks and try to make or avoid making a line depending on game type.
 
+**Movable game**
 ![movable game](/_for_readme/movable_game.png)
 In beginning players puts their mark like in normal game but after some moves they can't put more marks and they have to move already placed marks. 
 The game has moves limit which is reached results in a draw.
 
+**One mark game**
 ![one mark game](/_for_readme/one_mark_game.png)
 Similar to normal version but both of the players have the same mark.
 
