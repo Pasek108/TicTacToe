@@ -180,23 +180,34 @@ Player has to choose:
 ----------------------------------
 
 #### Game
+In game view has:
+- Message info (player's turn, waiting for player in mulitplayer)
+- Players info (marks of the players, which player is the user)
+- Game board (with line in column, row or diagonal if one of the players win)
+- Game info (name, marks, board size, type)
+- Quit and Replay buttons (replay button is disabled until the game is over)
+
 ![normal game](/_for_readme/normal_game.png)
+Normal version of the tic tac toe, users puts their marks and try to make or avoid making a line depending on game type.
 
 ![movable game](/_for_readme/movable_game.png)
+In beginning players puts their mark like in normal game but after some moves they can't put more marks and they have to move already placed marks. 
+The game has moves limit which is reached results in a draw.
 
 ![one mark game](/_for_readme/one_mark_game.png)
-
+Similar to normal version but both of the players have the same mark.
 
 ----------------------------------
 
 #### Multiplayer game
-<img alt="multiplayer game" src="/_for_readme/multi_game.png" width="50%" align="left">
-
+<img alt="multiplayer game" src="/_for_readme/multi_game.png" width="50%" align="right">
+  
 Games in multiplayer are the same as normal games, the only differences are:
 - Position of a player will be hilighted in red color if there is no given player or the player left the game
 - If there is no enemy player the game will be stopped on unactive player turn.
 - On the bottom there is a room id and button to copy invitation link. 
 
+<br>
 Password in invitation link is passed in the URL.
 If both players leave the game then the room and its game is deleted.
 
