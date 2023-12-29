@@ -142,7 +142,7 @@ Main menu is basically a form for creating a game.
 Click on the multiplayer option will take the player to the multiplayer lobby.<br>
 Click on the back option will take the player to the previous step.<br>
 
-![main menu](/_for_readme/main_menu_steps.png)
+![create game](/_for_readme/create_game.png)
 Creating a game is a 3-step form:
 1. Enemy (AI or player on the same device) and game mode
 2. Starting player and type of game (standard, reversed)
@@ -151,7 +151,7 @@ Creating a game is a 3-step form:
 ----------------------------------
 
 #### Multiplayer lobby
-![multiplayer_lobby](/_for_readme/multi_lobby.png)
+![multiplayer lobby](/_for_readme/multi_lobby.png)
 The lobby shows all existing games in the form of a list of rooms that the player can join or create a new one. When there is no players in the room, the room is deleted. If the room is full player can't join until some place becomes available. In that case the join button is disabled. Rooms protected by password has a join button with a lock icon. After clicking it player has to put the correct password in order to join to the game.
 
 Each of the rooms in the lobby has:
@@ -164,6 +164,8 @@ Each of the rooms in the lobby has:
 - Number of players in the room
 - Join button
 
+![multiplayer create game](/_for_readme/multi_create_game.png)
+<br>
 Creating a game is similar to creating a game in the main menu. The difference is that it is packed in one form and has option for setting password.
 
 Player has to choose:
@@ -178,13 +180,18 @@ Player has to choose:
 ----------------------------------
 
 #### Game
-![game](/_for_readme/onemark_game.png)
+![normal game](/_for_readme/normal_game.png)
+
+![movable game](/_for_readme/movable_game.png)
+
+![one mark game](/_for_readme/one_mark_game.png)
 
 
 ----------------------------------
 
 #### Multiplayer game
 ![multiplayer_game](/_for_readme/multi_game.png)
+<br>
 Games in multiplayer are the same as normal games but on the bottom there is a room id and button to copy a link for someone to join a room. 
 Password is passed in the URL.
 
