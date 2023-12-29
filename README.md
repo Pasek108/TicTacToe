@@ -164,8 +164,8 @@ Each of the rooms in the lobby has:
 - Number of players in the room
 - Join button
 
-![multiplayer create game](/_for_readme/multi_create_game.png)
-<br>
+<img alt="multiplayer create game" src="/_for_readme/multi_create_game.png" width="300" align="right">
+
 Creating a game is similar to creating a game in the main menu. The difference is that it is packed in one form and has option for setting password.
 
 Player has to choose:
@@ -190,13 +190,15 @@ Player has to choose:
 ----------------------------------
 
 #### Multiplayer game
-![multiplayer_game](/_for_readme/multi_game.png)
-<br>
-Games in multiplayer are the same as normal games but on the bottom there is a room id and button to copy a link for someone to join a room. 
-Password is passed in the URL.
+<img alt="multiplayer game" src="/_for_readme/multi_game.png" width="50%" align="left">
 
-If there is no other player or player left the game, its position will be hilighted in red color and game will be stopped on waiting for enemy player to making a move.
-If both players leave the game then te romm and its game is deleted.
+Games in multiplayer are the same as normal games, the only differences are:
+- Position of a player will be hilighted in red color if there is no given player or the player left the game
+- If there is no enemy player the game will be stopped on unactive player turn.
+- On the bottom there is a room id and button to copy invitation link. 
+
+Password in invitation link is passed in the URL.
+If both players leave the game then the room and its game is deleted.
 
 ----------------------------------
 
