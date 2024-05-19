@@ -253,28 +253,6 @@ The project directory tree looks like this:
 > [!WARNING]  
 > Classes must be loaded from bottom to the top to avoid situation when class does not exist in the time of its objects creation
 
-Menu is entry of the program.
 
-Menu creates and manages one instance of each of the classes:
-- MenuWindow (Credits)
-- Difficulty
-- TopScore
-- Game
-
-Difficulty and TopScore classes are extension of MenuWindow class which is responsible for showing and hiding menu window with transition
-
-Game class creates and manages:
-- One instance of RoadBackground class
-- Two instances of treesBackground class (left and right side)
-- One instance of classes:
-  - HealthBar
-  - EnergyBar
-  - PointsCounter
-  - GameOver
-- One instance of Player class
-- Many instances of classes:
-  - Enemy
-  - Deer
-  - HappyDeer
 
 
