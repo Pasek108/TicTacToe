@@ -4,7 +4,8 @@ import json
 from Game import Game
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
+app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
+#app.config.from_pyfile('config.py')
 socketio = SocketIO(app)
 rooms = []
 
