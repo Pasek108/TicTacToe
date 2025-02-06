@@ -1,41 +1,52 @@
-# TicTacToe Readme
-<details>
-  <summary>❓Why the page is not loading❓</summary>
-  Due to usage of Flask for multiplayer I had to use hosting with support for this technology. 
-  I have no money so I used a free hosting which unfortunately puts websites to sleep. Juts wait a few minutes and it should work.
-</details>
-<details>
-  <summary>❓Why my commits often have no names and I'm not using branches❓</summary>
-  <ul>
-    <li>I often create with bursts many things at once</li>
-    <li>I don't plan things ahead, I just create things that seems good at that moment</li>
-    <li>Sometimes I have bad internet connection and it is troublesome to send commits</li>
-    <li>I'm coding alone so creating branches and describing commits is not useful for me</li>
-  <ul>
-</details>
+<h1 align="center">TicTacToe - Readme</h1>
+<p align="center">
+  <strong>
+    Three tic-tac-toe versions in two modes, playable vs AI, vs player locally and multiplayer in real-time.
+  </strong>
+</p>
 
-## Table of Contents
-* [Informations](#informations)
-  * [Technologies](#technologies)
+<!-- 
+<div align="center">
+  <a href="https://www.ur.edu.pl/pl/kolegia/kolegium-nauk-przyrodniczych">
+    <img src="_for_readme/ur_banner.jpg?">
+  </a>
+</div>-->
+
+<br>
+
+# Table of Contents
+* [Overview :sparkles:](#overview-sparkles)
+  * [About](#about)
   * [Features](#features)
+  * [Technologies](#technologies)
   * [Setup](#setup)
   * [Acknowledgements](#acknowledgements)
-* [Details](#details)
+* [Details :scroll:](#details-scroll)
   * [User interface](#user-interface)
   * [Project structure](#project-structure)
   * [Code organization](#code-organization)
 
 <br>
 
-## Informations
-Three tic-tac-toe versions in two modes. Player can play vs AI, vs player locally or over the internet in real-time. <br>
-See [live demo](https://tic-tac-toe-alqu.onrender.com).
+# Overview :sparkles:
+
+## About
+<details>
+  <summary>❓Why isn't the page loading?❓</summary>
+  Due to the use of Flask for multiplayer functionality, I had to host the project on a platform that supports this technology.  
+  Since I don’t have the budget for paid hosting, I’m using a free service, which unfortunately puts websites to sleep after inactivity. 
+  Just wait a few minutes, and it should work.
+</details>
+
+Three tic-tac-toe versions in two modes. Player can play vs AI, vs player locally or over the internet in real-time.
+
+Check out the [live version](https://pasek108.github.io/BeFunge93Interpreter/).
+
+<br>
 
 ![preview](/_for_readme/preview.png)
 
-----------------------------------
-
-### Technologies
+## Technologies
 Languages:
 - HTML5
 - CSS3
@@ -54,48 +65,45 @@ Programs:
 - [VSCode](https://code.visualstudio.com)
 - [PyCharm](https://www.jetbrains.com/pycharm/)
 - [Prepros](https://prepros.io) (auto preview, processing scss)
-  
-----------------------------------
 
-### Features
+## Features
 - Customizable game settings:
-  - Starting player
-  - Board size
-  - Player marks
-  - Auto switching sides
+  - Starting player  
+  - Board size  
+  - Player marks  
+  - Auto-switching sides  
 - Two types of game:
-  - Standard - players try to make a line, first player making a line will win
-  - Reversed - players try to avoid making a line, first player making a line will lose
-- Three game modes
-  - Normal - typical tic tac toe
-  - Movable - players put N marks on NxN grid, then in each turn, they have to move one of their marks until one of them win or moves limit is reached
-  - One mark - tic tac toe with one mark
-- Three ways of playing:
-  - With computer
-  - With player on the same device
-  - With player over the internet
+  - Standard – Players try to make a line; the first player to do so wins.  
+  - Reversed – Players try to avoid making a line; the first player to do so loses.  
+- Three game modes:
+  - Normal – Classic Tic-Tac-Toe.  
+  - Movable – Players place *N* marks on an *N×N* grid. In each turn, they must move one of their marks until a player wins or the move limit is reached.  
+  - One Mark – Tic-Tac-Toe with only one mark per player.  
+- Three ways to play:
+  - Against the computer.  
+  - Against another player on the same device.  
+  - Against another player over the internet.  
 - Real-time multiplayer:
-  - Public lobby
-  - Password protected rooms
-  - Handling disconnections
+  - Public lobby.  
+  - Password-protected rooms.  
+  - Disconnection handling.  
 - Multiple languages:
-  - Polish
-  - English
+  - Polish  
+  - English  
 
 <br>
- 
+
 > [!NOTE]  
-> Room for improvements:
-> - In-game instruction about game modes
-> - Inviting by QR code
-> - More game modes
-> - Users accounts for stats, custom mark and achievements
-> - Pagination, filtering and searching for rooms in multiplayer lobby
-> - Add more languages
+> Room for improvements:  
+> - In-game instructions for game modes.  
+> - Inviting players via QR code.  
+> - More game modes.  
+> - User accounts for stats, custom marks, and achievements.  
+> - Pagination, filtering, and searching for rooms in the multiplayer lobby.  
+> - Adding more languages.  
 
-----------------------------------
 
-### Setup
+## Setup
 Ways to run this program: 
 1. Use the [live demo](https://tic-tac-toe-alqu.onrender.com)
 2. Follow the same steps as for editing the program
@@ -114,20 +122,18 @@ To edit this program:
 - Put generated string in config.py eg. *SECRET_KEY = "generated_string"*
 - Start coding
 
-----------------------------------
-
-### Acknowledgements
+## Acknowledgements
 - [tic tac toe wariants - wiki](https://en.wikipedia.org/wiki/Tic-tac-toe_variants)
 - [tic tac toe wariants - whatdowedoallday](https://www.whatdowedoallday.com/tic-tac-toe-variations/)
 - [tic tac toe wariants - byrdseed](https://www.byrdseed.tv/category/enrichment/games/tic-tac-toe-variants/)
 
 <br>
 
-## Details
-This section is a general description of the project required to understand how it works, the exact details are in the code or simply are the code.
+# Details :scroll:
 
-### User interface
-#### Every page
+## User interface
+
+### Every page
 On every page there is: 
 - Header:
   - Title which is a link to the main menu page
@@ -135,7 +141,7 @@ On every page there is:
 - Footer
   - Link to my github
 
-#### Main menu
+### Main menu
 ![main menu](/_for_readme/main_menu.png)
 Main menu is basically a form for creating a game.
 
@@ -148,9 +154,7 @@ Creating a game is a 3-step form:
 2. Starting player and type of game (standard, reversed)
 3. Board size, players marks, changing sides every game
 
-----------------------------------
-
-#### Multiplayer lobby
+### Multiplayer lobby
 ![multiplayer lobby](/_for_readme/multi_lobby.png)
 The lobby shows all existing games in the form of a list of rooms that the player can join or create a new one. When there is no players in the room, the room is deleted. If the room is full player can't join until some place becomes available. In that case the join button is disabled. Rooms protected by password has a join button with a lock icon. After clicking it player has to put the correct password in order to join to the game.
 
@@ -177,9 +181,7 @@ Player has to choose:
 - Starting player
 - Switching sides every game
 
-----------------------------------
-
-#### Game
+### Game
 In game view has:
 - Message info (player's turn, waiting for player in mulitplayer)
 - Players info (marks of the players, which player is the user)
@@ -209,9 +211,7 @@ The game has moves limit which is reached results in a draw.
 ![one mark game](/_for_readme/one_mark_game.png)
 Similar to normal version but both of the players have the same mark.
 
-----------------------------------
-
-#### Multiplayer game
+### Multiplayer game
 <img alt="multiplayer game" src="/_for_readme/multi_game.png" width="50%" align="right">
   
 Games in multiplayer are the same as normal games, the only differences are:
@@ -222,10 +222,8 @@ Games in multiplayer are the same as normal games, the only differences are:
 Password in invitation link is passed in the URL.
 When both players leave the game, the room and its game is deleted.
 
-----------------------------------
 
-### Project structure
-The project directory tree looks like this:
+## Project structure
 - :file_folder: TicTacToe (project folder)
   - :page_facing_up: *github and prepros config*
   - :page_facing_up: *readme file*
@@ -244,15 +242,9 @@ The project directory tree looks like this:
       - :page_facing_up: *scss files*
       - :file_folder: css - :page_facing_up: *css files compiled by prepros*
 
-----------------------------------
-
-### Code organization
+## Code organization
 
 ![program diagram](/_for_readme/program_diagram.png)
 
 > [!WARNING]  
 > Classes must be loaded from bottom to the top to avoid situation when class does not exist in the time of its objects creation
-
-
-
-
