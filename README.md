@@ -5,14 +5,19 @@
   </strong>
 </p>
 
-<!-- 
 <div align="center">
-  <a href="https://www.ur.edu.pl/pl/kolegia/kolegium-nauk-przyrodniczych">
-    <img src="_for_readme/ur_banner.jpg?">
-  </a>
-</div>-->
+  <img src="_for_readme/banner.png?">
+</div>
 
 <br>
+
+<details>
+  <summary>❓Why isn't the page loading?❓</summary>
+  Due to the use of Flask for multiplayer functionality, I had to host the project on a platform that supports this technology.  
+  Since I don’t have the budget for paid hosting, I’m using a free service, which unfortunately puts websites to sleep after inactivity. 
+  Just wait a few minutes, and it should work.
+</details>
+
 
 # Table of Contents
 * [Overview :sparkles:](#overview-sparkles)
@@ -31,13 +36,6 @@
 # Overview :sparkles:
 
 ## About
-<details>
-  <summary>❓Why isn't the page loading?❓</summary>
-  Due to the use of Flask for multiplayer functionality, I had to host the project on a platform that supports this technology.  
-  Since I don’t have the budget for paid hosting, I’m using a free service, which unfortunately puts websites to sleep after inactivity. 
-  Just wait a few minutes, and it should work.
-</details>
-
 Three tic-tac-toe versions in two modes. Player can play vs AI, vs player locally or over the internet in real-time.
 
 Check out the [live version](https://pasek108.github.io/BeFunge93Interpreter/).
