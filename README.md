@@ -1,4 +1,4 @@
-<h1 align="center">TicTacToe - Readme</h1>
+<h1 align="center">TicTacToe</h1>
 <p align="center">
   <strong>
     A web-based Tic-Tac-Toe application featuring different game rules, local play, and real-time multiplayer functionality.
