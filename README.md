@@ -1,22 +1,16 @@
 <h1 align="center">TicTacToe - Readme</h1>
 <p align="center">
   <strong>
-    Three tic-tac-toe versions in two modes, playable vs AI, vs player locally and multiplayer in real-time.
+    A web-based Tic-Tac-Toe application featuring different game rules, local play, and real-time multiplayer functionality.
   </strong>
 </p>
 
+<!--
 <div align="center">
   <img src="_for_readme/banner.png?">
 </div>
 
 <br>
-
-<details>
-  <summary>❓Why isn't the page loading?❓</summary>
-  Due to the use of Flask for multiplayer functionality, I had to host the project on a platform that supports this technology.  
-  Since I don’t have the budget for paid hosting, I’m using a free service, which unfortunately puts websites to sleep after inactivity. 
-  Just wait a few minutes, and it should work.
-</details>
 
 
 # Table of Contents
@@ -30,13 +24,13 @@
   * [User interface](#user-interface)
   * [Project structure](#project-structure)
   * [Code organization](#code-organization)
-
+-->
 <br>
 
 # Overview :sparkles:
 
 ## About
-Three tic-tac-toe versions in two modes. Player can play vs AI, vs player locally or over the internet in real-time.
+This project is a collection of Tic-Tac-Toe variations built to practice full-stack development. It combines a JavaScript-based front-end with a Python back-end to handle real-time game states across different clients. Players can test different game modes against an AI, locally on one device, or online against others.
 
 Check out the [live version](https://pasek108.github.io/BeFunge93Interpreter/).
 
@@ -58,37 +52,26 @@ Libraries and frameworks:
 - [Socekt.IO](https://socket.io) 4.6.0
 - [Flask](https://flask.palletsprojects.com/en/3.0.x/)
 - [Flask SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
-  
-Programs:
-- [VSCode](https://code.visualstudio.com)
-- [PyCharm](https://www.jetbrains.com/pycharm/)
-- [Prepros](https://prepros.io) (auto preview, processing scss)
 
 ## Features
-- Customizable game settings:
-  - Starting player  
-  - Board size  
-  - Player marks  
-  - Auto-switching sides  
-- Two types of game:
-  - Standard – Players try to make a line; the first player to do so wins.  
-  - Reversed – Players try to avoid making a line; the first player to do so loses.  
-- Three game modes:
-  - Normal – Classic Tic-Tac-Toe.  
-  - Movable – Players place *N* marks on an *N×N* grid. In each turn, they must move one of their marks until a player wins or the move limit is reached.  
-  - One Mark – Tic-Tac-Toe with only one mark per player.  
-- Three ways to play:
-  - Against the computer.  
-  - Against another player on the same device.  
-  - Against another player over the internet.  
-- Real-time multiplayer:
-  - Public lobby.  
-  - Password-protected rooms.  
-  - Disconnection handling.  
-- Multiple languages:
-  - Polish  
-  - English  
+### Game Rules & Modes
+* **Multiple Rulesets:** Play the **Standard** game (connect a line to win) or **Reversed** (avoid making a line).
+* **Game Variations:**
+    * **Normal:** The classic 3x3 experience.
+    * **Movable:** Players move their existing marks on the grid after a certain limit is reached.
+    * **One Mark:** A simplified version using only one mark per player.
+* **Customization:** Adjustable board sizes, starting player selection, and player icons.
 
+### Ways to Play
+* **AI Opponent:** Play solo against a basic computer player.
+* **Local Play:** Two players can play on the same device.
+* **Online Multiplayer:** Real-time matches via WebSockets, including a public lobby and private, password-protected rooms.
+
+### Additional Functionality
+* **State Management:** Automatic handling of player disconnections in online rooms.
+* **Localization:** Full UI support for both English and Polish. 
+
+<!--
 <br>
 
 > [!NOTE]  
@@ -124,6 +107,8 @@ To edit this program:
 - [tic tac toe wariants - wiki](https://en.wikipedia.org/wiki/Tic-tac-toe_variants)
 - [tic tac toe wariants - whatdowedoallday](https://www.whatdowedoallday.com/tic-tac-toe-variations/)
 - [tic tac toe wariants - byrdseed](https://www.byrdseed.tv/category/enrichment/games/tic-tac-toe-variants/)
+
+-->
 
 <br>
 
@@ -220,7 +205,7 @@ Games in multiplayer are the same as normal games, the only differences are:
 Password in invitation link is passed in the URL.
 When both players leave the game, the room and its game is deleted.
 
-
+<!--
 ## Project structure
 - :file_folder: TicTacToe (project folder)
   - :page_facing_up: *github and prepros config*
@@ -246,3 +231,5 @@ When both players leave the game, the room and its game is deleted.
 
 > [!WARNING]  
 > Classes must be loaded from bottom to the top to avoid situation when class does not exist in the time of its objects creation
+
+-->
