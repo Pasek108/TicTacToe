@@ -40,9 +40,9 @@ Check out the [live version](https://pasek108.github.io/BeFunge93Interpreter/).
 
 ## Technologies
 Languages:
-- HTML5
-- CSS3
-- JS ES2018
+- HTML 5
+- CSS 3
+- JavaScript
 - Python 3.11
 
 Libraries and frameworks:
